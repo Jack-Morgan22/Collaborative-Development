@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +31,7 @@ body {margin:0;}
 </style>
 </head>
 <body>
-
+<!-- This bit of code oprates the navigation bar where users can find the menu-->
 <div class="topnav">
   <a class="active" href="#home">Home</a>
   <a href="#news">News</a>
@@ -49,21 +49,100 @@ body {margin:0;}
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+</style>
+</head>
+<body>
+<!-- This where users can search within the website -->
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+<ul id="myUL">
+  <li><a href=""></a></li>
+  <li><a href=""></a></li>
+
+  <li><a href=""></a></li>
+  <li><a href=""></a></li>
+</ul>
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
 <link href='https://fonts.googleapis.com/css?family=Alegreya Sans' rel='stylesheet'>
 <style>
 body {
-    font-family: 'Alegreya Sans';font-size: 22px;
-}
+    font-family: 'Alegreya Sans';font-size: 22px;  <!-- This line of code is for the the title font that will be displayed onto the page -->
+}   
 
 </style>
 </head>
 <body>
 <center>
-<h1>Survey </h1>
+<h1>Survey</h1> <!-- Heading -->
 </center>
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfAsTs-cMxuBU_pP0qIECTCWak3SKfe4jid8UCpXSXrXX-SMQ/viewform?embedded=true" width="900" height="2830" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
+<!-- Source for the form that the users can use  -->
 </body>
 </html>  
+
+
 
 
