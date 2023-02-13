@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Different Types of Surveys</title>
+    </head>
+<style>
+    div{
+        width: 300px;
+        border: 15px;
+        padding: 5px;
+        margin: 20px;
+    }
+</style>
+    <body>
+        <!--This is the question for the survey name.-->
+        <div>
+            <form>
+                <label for= "surveyname">Enter Survey Name:</label><br>
+                <input type="text" id = "surveyname" name = "surveyname"><br>
+            </form>
+        </div>
+        <!--This is a form for text based questions.-->
+        <div>
+            <form>
+                <label for = "question">Enter question name:</label><br>
+                <input type = "text" id = "question" name = "question" size = "50"><br>
+                <textarea name = "textanswer" id = "textanswer" rows = "4" cols = "50"></textarea><br>
+            </form>
+        </div>
+        <!--This is a form for questions that require a colour to be picked.-->
+        <div>
+            <form>
+                <label for = "question">Enter question name:</label><br>
+                <input type = "text" id = "question" name = "question" size = "50"><br>
+                <input type = "color" id = "color" name = "color">
+            </form>
+        </div>
+        <!--This is a form for questions with multiple choice answers that could have multiple answers-->
+        <div>
+            <form>
+                <label for = "question">Enter question name:</label>
+                <input type = "text" id = "question" name = "question" size = "50"><br>
+                <label for = "checkbox1"></label>
+                <input type = "text" id = checkbox1 name = checkbox1>
+                <input type = "checkbox" id = "checkbox" name = "checkbox1">
+                <input type = "text" id = checkbox1 name = checkbox1>
+                <input type = "checkbox" id = "checkbox" name = "checkbox1">
+                <input type = "text" id = checkbox1 name = checkbox1>
+                <input type = "checkbox" id = "checkbox" name = "checkbox1">
+            </form>
+        </div>
+        <!--This is a form for questions with dates as answers.-->
+        <div>
+            <form>
+                <label for = "question">Enter question name:</label>
+                <input type = "text" id = "question" name = "question" size = "50"><br>
+                <input type = "date" id = "date" name = "date">
+            </form>
+        </div>
+        <!--This is a form for questions with emails as answers.-->
+        <div>
+            <form>
+                <label for = "question">Enter question name:</label>
+                <input type = "text" id = "question" name = "question" size = "50"><br>
+                <input type = "email" id = "email" name = "email">
+            </form>
+        </div>
+        <!--This is a form for questions with numbers as answers.-->
+        <div>
+            <form>
+                <label for = "question">Enter question name:</label>
+                <input type = "text" id = "question" name = "question" size = "50"><br>
+                <input type = "number" id = "number" name = "number">
+            </form>
+        </div>
+        <!--This is a form for files to be submitted.-->
+        <div>
+            <form>
+                <label for = "question">Enter question name:</label>
+                <input type = "text" id = "question" name = "question" size = "50"><br>
+                <input type = "file" id = "file" name = "file">
+            </form>
+        </div>
+        <input type = "submit">
+    </body>
+</html> 
