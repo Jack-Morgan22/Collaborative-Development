@@ -20,7 +20,8 @@
             </form>
         </div>
         <!--This is a form for text based questions.-->
-        <div>
+        <input type="button" onclick="TextBasedFunction()" value="Text Based">
+        <div id="textBased">
             <form>
                 <label for = "question">Enter question name:</label><br>
                 <input type = "text" id = "question" name = "question" size = "50"><br>
@@ -35,8 +36,18 @@
                 <input type = "color" id = "color" name = "color">
             </form>
         </div>
+        <script id="TextBased">
+            function TextBasedFunction(){
+            var i = 0;
+            const textBased = document.getElementById("textBased");
+            var clone = textBased.cloneNode(true);
+            clone.id = ("textBased" + i);
+            i = i + 1;
+            document.body.appendChild(clone);
+            }
+        </script>
         <!--This is a form for questions with multiple choice answers that could have multiple answers-->
-        <div>
+        <div id = "MultipleChoice">
             <form>
                 <label for = "question">Enter question name:</label>
                 <input type = "text" id = "question" name = "question" size = "50"><br>
