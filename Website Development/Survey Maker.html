@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <html>
     <head>
         <title>Different Types of Surveys</title>
@@ -11,6 +13,155 @@
         margin: 20px;
     }
 </style>
+<div id="textBased" hidden>
+    <form>
+        <label for = "question">Enter question name:</label><br>
+        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <textarea name = "textanswer" id = "textanswer" rows = "4" cols = "50"></textarea><br>
+    </form>
+</div>
+<!--This is a form for questions that require a colour to be picked.-->
+<div id="colourBased" hidden>
+    <form>
+        <label for = "question">Enter question name:</label><br>
+        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "color" id = "color" name = "color">
+    </form>
+</div>
+<!--This is a form for questions with multiple choice answers that could have multiple answers-->
+<div id = "multipleChoice" hidden>
+    <form>
+        <label for = "question">Enter question name:</label>
+        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <div id = "multipleChoiceCheckBox">
+            <label for = "checkbox1"></label>
+            <input type = "text" id = checkbox1 name = checkbox1>
+        </div>
+    </form>
+</div>
+<!--This is a form for questions with dates as answers.-->
+<div id = "dateBased" hidden>
+    <form>
+        <label for = "question">Enter question name:</label>
+        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "date" id = "date" name = "date">
+    </form>
+</div>
+<!--This is a form for questions with emails as answers.-->
+<div id = "emailBased" hidden>
+    <form>
+        <label for = "question">Enter question name:</label>
+        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "email" id = "email" name = "email">
+    </form>
+</div>
+<!--This is a form for questions with numbers as answers.-->
+<div id = "numberBased" hidden>
+    <form>
+        <label for = "question">Enter question name:</label>
+        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "number" id = "number" name = "number">
+    </form>
+</div>
+<!--This is a form for files to be submitted.-->
+<div id = "fileBased" hidden>
+    <form>
+        <label for = "question">Enter question name:</label>
+        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "file" id = "file" name = "file">
+    </form>
+</div>
+<div id = "numberofchoicesbutton" hidden>
+    <form>
+        <label for = "numberofchoices">Enter amount of choices:</label>
+        <input type = "number" id = "numberofchoices">
+        <input type = "submit" onclick = "MultipleChoiceFunctionNumberInput()">
+    </form>
+</div>
+<script>
+    function TextBasedFunction(){
+        var i = 0;
+        const textBased = document.getElementById("textBased");
+        var clone = textBased.cloneNode(true);
+        clone.id = ("textBased" + i);
+        i = i + 1;
+        clone.removeAttribute("hidden");
+        document.body.appendChild(clone);
+    }
+    function ColourBasedFunction(){
+        var i = 0;
+        const colourBased = document.getElementById("colourBased");
+        var clone = colourBased.cloneNode(true);
+        clone.id = ("colourBased" + i);
+        i = i + 1;
+        clone.removeAttribute("hidden");
+        document.body.appendChild(clone);
+    }
+    function MultipleChoiceFunction(numberOfChoices){
+        var i = 0;
+        var x = 0;
+        const multipleChoice = document.getElementById("multipleChoice");
+        var clone = multipleChoice.cloneNode(true);
+        clone.id = ("multipleChoice" + i);
+        i = i + 1;
+        clone.removeAttribute("hidden");
+        document.body.appendChild(clone);
+        while(numberOfChoices != x){
+            const multipleChoiceBox = document.getElementById("multipleChoiceCheckBox");
+            var clone = multipleChoiceBox.cloneNode(true);
+            clone.id = ("multipleChoiceCheckBox" + x);
+            document.body.appendChild(clone);
+            o = o + 1;
+        }
+    }
+    function EmailBasedFunction(){
+        var i = 0;
+        const emailBased = document.getElementById("emailBased");
+        var clone = emailBased.cloneNode(true);
+        clone.id = ("emailBased" + i);
+        i = i + 1;
+        clone.removeAttribute("hidden");
+        document.body.appendChild(clone);
+    }
+    function DateBasedFunction(){
+        var i = 0;
+        const dateBased = document.getElementById("dateBased");
+        var clone = dateBased.cloneNode(true);
+        clone.id = ("dateBased" + i);
+        i = i + 1;
+        clone.removeAttribute("hidden");
+        document.body.appendChild(clone);
+    }
+    function NumberBasedFunction(){
+        var i = 0;
+        const numberBased = document.getElementById("numberBased");
+        var clone = numberBased.cloneNode(true);
+        clone.id = ("numberBased" + i);
+        i = i + 1;
+        clone.removeAttribute("hidden");
+        document.body.appendChild(clone);
+    }
+    function FileBasedFunction(){
+        var i = 0;
+        const fileBased = document.getElementById("fileBased");
+        var clone = fileBased.cloneNode(true);
+        clone.id = ("fileBased" + i);
+        i = i + 1;
+        clone.removeAttribute("hidden");
+        document.body.appendChild(clone);
+    }
+    function MultipleChoiceFunctionNumber(){
+        const numberInput = document.getElementById("numberofchoicesbutton");
+        numberInput.removeAttribute("hidden");
+        document.body.appendChild(numberInput);
+    }
+    function MultipleChoiceFunctionNumberInput(){
+        const numberInput = document.getElementById("numberofchoicesbutton");
+        numberInput.setAttribute("hidden");
+        var x = document.getElementById("numberofchoices").value;
+        MultipleChoiceFunction(x);
+    }
+</script>
     <body>
         <!--This is the question for the survey name.-->
         <div>
@@ -21,77 +172,12 @@
         </div>
         <!--This is a form for text based questions.-->
         <input type="button" onclick="TextBasedFunction()" value="Text Based">
-        <div id="textBased">
-            <form>
-                <label for = "question">Enter question name:</label><br>
-                <input type = "text" id = "question" name = "question" size = "50"><br>
-                <textarea name = "textanswer" id = "textanswer" rows = "4" cols = "50"></textarea><br>
-            </form>
-        </div>
-        <!--This is a form for questions that require a colour to be picked.-->
-        <div>
-            <form>
-                <label for = "question">Enter question name:</label><br>
-                <input type = "text" id = "question" name = "question" size = "50"><br>
-                <input type = "color" id = "color" name = "color">
-            </form>
-        </div>
-        <script id="TextBased">
-            function TextBasedFunction(){
-            var i = 0;
-            const textBased = document.getElementById("textBased");
-            var clone = textBased.cloneNode(true);
-            clone.id = ("textBased" + i);
-            i = i + 1;
-            document.body.appendChild(clone);
-            }
-        </script>
-        <!--This is a form for questions with multiple choice answers that could have multiple answers-->
-        <div id = "MultipleChoice">
-            <form>
-                <label for = "question">Enter question name:</label>
-                <input type = "text" id = "question" name = "question" size = "50"><br>
-                <label for = "checkbox1"></label>
-                <input type = "text" id = checkbox1 name = checkbox1>
-                <input type = "checkbox" id = "checkbox" name = "checkbox1">
-                <input type = "text" id = checkbox1 name = checkbox1>
-                <input type = "checkbox" id = "checkbox" name = "checkbox1">
-                <input type = "text" id = checkbox1 name = checkbox1>
-                <input type = "checkbox" id = "checkbox" name = "checkbox1">
-            </form>
-        </div>
-        <!--This is a form for questions with dates as answers.-->
-        <div>
-            <form>
-                <label for = "question">Enter question name:</label>
-                <input type = "text" id = "question" name = "question" size = "50"><br>
-                <input type = "date" id = "date" name = "date">
-            </form>
-        </div>
-        <!--This is a form for questions with emails as answers.-->
-        <div>
-            <form>
-                <label for = "question">Enter question name:</label>
-                <input type = "text" id = "question" name = "question" size = "50"><br>
-                <input type = "email" id = "email" name = "email">
-            </form>
-        </div>
-        <!--This is a form for questions with numbers as answers.-->
-        <div>
-            <form>
-                <label for = "question">Enter question name:</label>
-                <input type = "text" id = "question" name = "question" size = "50"><br>
-                <input type = "number" id = "number" name = "number">
-            </form>
-        </div>
-        <!--This is a form for files to be submitted.-->
-        <div>
-            <form>
-                <label for = "question">Enter question name:</label>
-                <input type = "text" id = "question" name = "question" size = "50"><br>
-                <input type = "file" id = "file" name = "file">
-            </form>
-        </div>
+        <input type="button" onclick="ColourBasedFunction()" value="Colour Based">
+        <input type="button" onclick="MultipleChoiceFunctionNumber()" value="Multiple Choice">
+        <input type="button" onclick="DateBasedFunction()" value="Date Based">
+        <input type="button" onclick="EmailBasedFunction()" value="Email Based">
+        <input type="button" onclick="NumberBasedFunction()" value="Number Based">
+        <input type="button" onclick="FileBasedFunction()" value="File Based">
         <input type = "submit">
     </body>
 </html> 
