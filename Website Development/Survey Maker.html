@@ -97,23 +97,6 @@
         clone.removeAttribute("hidden");
         document.body.appendChild(clone);
     }
-    function MultipleChoiceFunction(numberOfChoices){
-        var i = 0;
-        var x = 0;
-        const multipleChoice = document.getElementById("multipleChoice");
-        var clone = multipleChoice.cloneNode(true);
-        clone.id = ("multipleChoice" + i);
-        i = i + 1;
-        clone.removeAttribute("hidden");
-        document.body.appendChild(clone);
-        while(numberOfChoices != x){
-            const multipleChoiceBox = document.getElementById("multipleChoiceCheckBox");
-            var clone = multipleChoiceBox.cloneNode(true);
-            clone.id = ("multipleChoiceCheckBox" + x);
-            document.body.appendChild(clone);
-            o = o + 1;
-        }
-    }
     function EmailBasedFunction(){
         var i = 0;
         const emailBased = document.getElementById("emailBased");
@@ -159,10 +142,29 @@
         const numberInput = document.getElementById("numberofchoicesbutton");
         numberInput.setAttribute("hidden");
         var x = document.getElementById("numberofchoices").value;
+        document.getElementById("number1").innerHTML = x;
         MultipleChoiceFunction(x);
+    }
+    function MultipleChoiceFunction(numberOfChoices){
+        var i = 0;
+        var x = 0;
+        const multipleChoice = document.getElementById("multipleChoice");
+        var clone = multipleChoice.cloneNode(true);
+        clone.id = ("multipleChoice" + i);
+        i = i + 1;
+        clone.removeAttribute("hidden");
+        document.body.appendChild(clone);
+        while(numberOfChoices != x){
+            const multipleChoiceBox = document.getElementById("multipleChoiceCheckBox");
+            var clone = multipleChoiceBox.cloneNode(true);
+            clone.id = ("multipleChoiceCheckBox" + x);
+            document.body.appendChild(clone);
+            o = o + 1;
+        }
     }
 </script>
     <body>
+        <p id = "number1"></p>
         <!--This is the question for the survey name.-->
         <div>
             <form>
