@@ -1,0 +1,37 @@
+// This where it links to the index page.
+function doGet(e) {
+  var x = HtmlService.createTemplateFromFile("Index");
+  var y = x.evaluate();
+  var z = y.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+  return z;
+}
+//It will check the login details that the users had entered and store them onto Google sheets.
+function checkLogin(username, password) {
+  var url = 'https://docs.google.com/spreadsheets/d/1jYM2M_u6MN0Dywz7qI9dB4HLdL883S6eERORH7DSSc0/edit#gid=0';
+  var ss= SpreadsheetApp.openByUrl(url);
+  var webAppSheet = ss.getSheetByName("DATA");
+  var getLastRow =  webAppSheet.getLastRow();
+  var found_record = '';
+  for(var i = 1; i <= getLastRow; i++)
+  {
+   if(webAppSheet.getRange(i, 1).getValue().toUpperCase() == username.toUpperCase() && 
+     webAppSheet.getRange(i, 2).getValue().toUpperCase() == password.toUpperCase())
+   {
+     found_record = 'TRUE';
+   }    
+  }
+  if(found_record == '')
+  {
+    found_record = 'FALSE'; 
+  }
+  
+  return found_record;
+  
+}
+//It will then check the records to overview if the users information is correct.
+function AddRecord(name, username, email, password){ 
+  var url = 'https://www.google.com/search?q=google&rlz=1C1GCEB_enGB1045GB1045&oq=google+&aqs=chrome.0.69i59l4j69i60l3j5.3391j0j7&sourceid=chrome&ie=UTF-8';
+  var ss= SpreadsheetApp.openByUrl(url);
+  var webAppSheet = ss.getSheetByName("DATA");
+  webAppSheet.appendRow([name,username,email,password]);
+  }
