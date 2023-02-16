@@ -18,6 +18,7 @@
         <label for = "question">Enter question name:</label><br>
         <input type = "text" id = "question" name = "question" size = "50"><br>
         <textarea name = "textanswer" id = "textanswer" rows = "4" cols = "50"></textarea><br>
+        <button>Delete</button>
     </form>
 </div>
 <!--This is a form for questions that require a colour to be picked.-->
@@ -26,6 +27,7 @@
         <label for = "question">Enter question name:</label><br>
         <input type = "text" id = "question" name = "question" size = "50"><br>
         <input type = "color" id = "color" name = "color">
+        <button>Delete</button>
     </form>
 </div>
 <!--This is a form for questions with multiple choice answers that could have multiple answers-->
@@ -37,6 +39,7 @@
             <label for = "checkbox1"></label>
             <input type = "text" id = checkbox1 name = checkbox1>
         </div>
+        <button>Delete</button>
     </form>
 </div>
 <!--This is a form for questions with dates as answers.-->
@@ -45,6 +48,7 @@
         <label for = "question">Enter question name:</label>
         <input type = "text" id = "question" name = "question" size = "50"><br>
         <input type = "date" id = "date" name = "date">
+        <button>Delete</button>
     </form>
 </div>
 <!--This is a form for questions with emails as answers.-->
@@ -53,6 +57,7 @@
         <label for = "question">Enter question name:</label>
         <input type = "text" id = "question" name = "question" size = "50"><br>
         <input type = "email" id = "email" name = "email">
+        <button>Delete</button>
     </form>
 </div>
 <!--This is a form for questions with numbers as answers.-->
@@ -61,6 +66,7 @@
         <label for = "question">Enter question name:</label>
         <input type = "text" id = "question" name = "question" size = "50"><br>
         <input type = "number" id = "number" name = "number">
+        <button>Delete</button>
     </form>
 </div>
 <!--This is a form for files to be submitted.-->
@@ -69,6 +75,7 @@
         <label for = "question">Enter question name:</label>
         <input type = "text" id = "question" name = "question" size = "50"><br>
         <input type = "file" id = "file" name = "file">
+        <button>Delete</button>
     </form>
 </div>
 <div id = "numberofchoicesbutton" hidden>
@@ -87,6 +94,7 @@
         i = i + 1;
         clone.removeAttribute("hidden");
         document.body.appendChild(clone);
+        DeleteButton();
     }
     function ColourBasedFunction(){
         var i = 0;
@@ -96,6 +104,7 @@
         i = i + 1;
         clone.removeAttribute("hidden");
         document.body.appendChild(clone);
+        DeleteButton();
     }
     function MultipleChoiceFunction(numberOfChoices){
         var i = 0;
@@ -106,6 +115,7 @@
         i = i + 1;
         clone.removeAttribute("hidden");
         document.body.appendChild(clone);
+        DeleteButton();
         while(numberOfChoices != x){
             const multipleChoiceBox = document.getElementById("multipleChoiceCheckBox");
             var clone = multipleChoiceBox.cloneNode(true);
@@ -122,6 +132,7 @@
         i = i + 1;
         clone.removeAttribute("hidden");
         document.body.appendChild(clone);
+        DeleteButton();
     }
     function DateBasedFunction(){
         var i = 0;
@@ -131,6 +142,7 @@
         i = i + 1;
         clone.removeAttribute("hidden");
         document.body.appendChild(clone);
+        DeleteButton();
     }
     function NumberBasedFunction(){
         var i = 0;
@@ -140,6 +152,7 @@
         i = i + 1;
         clone.removeAttribute("hidden");
         document.body.appendChild(clone);
+        DeleteButton();
     }
     function FileBasedFunction(){
         var i = 0;
@@ -149,6 +162,7 @@
         i = i + 1;
         clone.removeAttribute("hidden");
         document.body.appendChild(clone);
+        DeleteButton();
     }
     function MultipleChoiceFunctionNumber(){
         const numberInput = document.getElementById("numberofchoicesbutton");
