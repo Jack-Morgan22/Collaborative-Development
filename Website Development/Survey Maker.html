@@ -15,8 +15,7 @@
 </style>
 <div id="textBased" hidden>
     <form>
-        <label for = "question">Enter question name:</label><br>
-        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "text" id = "question" name = "question" size = "50" placeholder="Enter question name"><br>
         <textarea name = "textanswer" id = "textanswer" rows = "4" cols = "50"></textarea><br>
         <button>Delete</button>
     </form>
@@ -24,8 +23,7 @@
 <!--This is a form for questions that require a colour to be picked.-->
 <div id="colourBased" hidden>
     <form>
-        <label for = "question">Enter question name:</label><br>
-        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "text" id = "question" name = "question" size = "50" placeholder="Enter question name"><br>
         <input type = "color" id = "color" name = "color">
         <button>Delete</button>
     </form>
@@ -33,8 +31,7 @@
 <!--This is a form for questions with multiple choice answers that could have multiple answers-->
 <div id = "multipleChoice" hidden>
     <form>
-        <label for = "question">Enter question name:</label>
-        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "text" id = "question" name = "question" size = "50" placeholder="Enter question name"><br>
         <div id = "multipleChoiceCheckBox">
             <label for = "checkbox1"></label>
             <input type = "text" id = checkbox1 name = checkbox1>
@@ -45,8 +42,7 @@
 <!--This is a form for questions with dates as answers.-->
 <div id = "dateBased" hidden>
     <form>
-        <label for = "question">Enter question name:</label>
-        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "text" id = "question" name = "question" size = "50" placeholder="Enter question name"><br>
         <input type = "date" id = "date" name = "date">
         <button>Delete</button>
     </form>
@@ -54,8 +50,7 @@
 <!--This is a form for questions with emails as answers.-->
 <div id = "emailBased" hidden>
     <form>
-        <label for = "question">Enter question name:</label>
-        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "text" id = "question" name = "question" size = "50" placeholder="Enter question name"><br>
         <input type = "email" id = "email" name = "email">
         <button>Delete</button>
     </form>
@@ -63,8 +58,7 @@
 <!--This is a form for questions with numbers as answers.-->
 <div id = "numberBased" hidden>
     <form>
-        <label for = "question">Enter question name:</label>
-        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "text" id = "question" name = "question" size = "50" placeholder="Enter question name"><br>
         <input type = "number" id = "number" name = "number">
         <button>Delete</button>
     </form>
@@ -72,8 +66,7 @@
 <!--This is a form for files to be submitted.-->
 <div id = "fileBased" hidden>
     <form>
-        <label for = "question">Enter question name:</label>
-        <input type = "text" id = "question" name = "question" size = "50"><br>
+        <input type = "text" id = "question" name = "question" size = "50" placeholder="Enter question name"><br>
         <input type = "file" id = "file" name = "file">
         <button>Delete</button>
     </form>
@@ -81,7 +74,7 @@
 <div id = "numberofchoicesbutton" hidden>
     <form>
         <label for = "numberofchoices">Enter amount of choices:</label>
-        <input type = "number" id = "numberofchoices">
+        <input type = "number" id = "numberofchoices" placeholder="Enter amount of choices">
         <input type = "submit" onclick = "MultipleChoiceFunctionNumberInput()">
     </form>
 </div>
