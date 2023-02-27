@@ -1,0 +1,23 @@
+<DOCTYPE html>
+<html>
+<form id = "questionFrm" hidden>
+    <input type="text" placeholder="Enter Question Name" name="questionNm" id="questionID">
+    <input type="button" value = "Add" id="submitQuestionBtn" onclick = "AddQuestion()">
+    <input type="button" value="Delete" id="delBtn" onclick = "DeleteQuestion()">
+</form>
+    <head>
+        <title>Survey</title>
+    </head>
+    <body>
+        <script src = "surveymaker.js"></script>
+        <input type="text" placeholder="Enter Survey Name">
+        <label for="qstns">Survey Questions:</label>
+        <select name="qstns" id="qstns">
+            <option value = "Text">Text</option>
+            <option value = "Number">Number</option>
+            <option value = "Colour">Colour</option>
+        </select>
+        <input type="button" value = "Add" id="addQuestionBtn" onclick ="SurveyQuestions()">
+        <span id = "BodyHere">Hello</span>
+    </body>
+</html>
