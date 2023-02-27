@@ -4,17 +4,28 @@ CREATE TABLE Users (
 	Username VARCHAR(25) NOT NULL,
 	Password VARCHAR(25) NOT NULL,
 	CONSTRAINT Users_un UNIQUE (Password),
-	FirstName VARCHAR(25) NOT NULL,
-	LastName VARCHAR(25) NOT NULL,
+	Name VARCHAR(50) NOT NULL,
 	JoinDate DATE NOT NULL,
 	Email VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE MetaData (
-	TagID
-	TagType
+CREATE TABLE SurveyDetails (
+	SurveyID NUMERIC(10) NOT NULL AUTO_INCREMENT = 2023421900,
+	CONSTRAINT SurveyDetails_pk PRIMARY KEY (SurveyID),
+	SurveyName VARCHAR(5) NOT NULL,
+	CreationDate DATE NOT NULL,
+	UploadStatus CHAR(1) NOT NULL,
+	CONSTRAINT Check_Upload CHECK (UploadStatus = 'Y' or UploadStatus = 'N'),
+	UploadDate DATE,
+	Users_UserID NUMERIC(10) NOT NULL,
+	CONSTRAINT SD_users_fk FOREIGN KEY (Users_UserID) REFERENCES (UserID)
 );
 
-CREATE TABLE SurveyDetails (
-
+CREATE TABLE SurveyQuestions (
+	QuestionNumber NUMERIC(2) NOT NULL,
+	QuestionName TEXT NOT NULL,
+	QuestionType CHAR(2) NOT NULL,
+	QuestionStatus CHAR(1) NOT NULL,
+	SurveyDetails_SurveyID VARCHAR(10) NOT NULL,
+	CONSTRAINT SQ_SD_fk FOREIGN KEY (SurveyDetails_SurveyID) REFERENCES (SurveyID)
 );
