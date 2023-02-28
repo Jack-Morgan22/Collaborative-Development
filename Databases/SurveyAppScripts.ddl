@@ -26,6 +26,6 @@ CREATE TABLE SurveyQuestions (
 	QuestionName TEXT NOT NULL,
 	QuestionType CHAR(2) NOT NULL,
 	QuestionStatus CHAR(1) NOT NULL,
-	SurveyDetails_SurveyID VARCHAR(10) NOT NULL,
+	SurveyDetails_SurveyID NUMERIC(10) NOT NULL,
 	CONSTRAINT SQ_SD_fk FOREIGN KEY (SurveyDetails_SurveyID) REFERENCES (SurveyID)
 );
