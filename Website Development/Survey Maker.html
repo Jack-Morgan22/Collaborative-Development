@@ -86,8 +86,12 @@
         clone.id = ("textBased" + i);
         i = i + 1;
         clone.removeAttribute("hidden");
+<<<<<<< Updated upstream
         document.body.appendChild(clone);
         DeleteButton();
+=======
+        document.getElementById("addtome").appendChild(clone);
+>>>>>>> Stashed changes
     }
     function ColourBasedFunction(){
         var i = 0;
@@ -96,6 +100,7 @@
         clone.id = ("colourBased" + i);
         i = i + 1;
         clone.removeAttribute("hidden");
+<<<<<<< Updated upstream
         document.body.appendChild(clone);
         DeleteButton();
     }
@@ -116,6 +121,9 @@
             document.body.appendChild(clone);
             o = o + 1;
         }
+=======
+        document.getElementById("addtome").appendChild(clone);
+>>>>>>> Stashed changes
     }
     function EmailBasedFunction(){
         var i = 0;
@@ -124,8 +132,12 @@
         clone.id = ("emailBased" + i);
         i = i + 1;
         clone.removeAttribute("hidden");
+<<<<<<< Updated upstream
         document.body.appendChild(clone);
         DeleteButton();
+=======
+        document.getElementById("addtome").appendChild(clone);
+>>>>>>> Stashed changes
     }
     function DateBasedFunction(){
         var i = 0;
@@ -134,8 +146,12 @@
         clone.id = ("dateBased" + i);
         i = i + 1;
         clone.removeAttribute("hidden");
+<<<<<<< Updated upstream
         document.body.appendChild(clone);
         DeleteButton();
+=======
+        document.getElementById("addtome").appendChild(clone);
+>>>>>>> Stashed changes
     }
     function NumberBasedFunction(){
         var i = 0;
@@ -144,8 +160,12 @@
         clone.id = ("numberBased" + i);
         i = i + 1;
         clone.removeAttribute("hidden");
+<<<<<<< Updated upstream
         document.body.appendChild(clone);
         DeleteButton();
+=======
+        document.getElementById("addtome").appendChild(clone);
+>>>>>>> Stashed changes
     }
     function FileBasedFunction(){
         var i = 0;
@@ -154,8 +174,12 @@
         clone.id = ("fileBased" + i);
         i = i + 1;
         clone.removeAttribute("hidden");
+<<<<<<< Updated upstream
         document.body.appendChild(clone);
         DeleteButton();
+=======
+        document.getElementById("addtome").appendChild(clone);
+>>>>>>> Stashed changes
     }
     function MultipleChoiceFunctionNumber(){
         const numberInput = document.getElementById("numberofchoicesbutton");
@@ -185,6 +209,23 @@
             document.body.appendChild(clone);
             o = o + 1;
         }
+    function MakeSurveyPage(){
+        let frame = document.getElementById("theFrame");
+        let doc = document.implementation.createHTMLDocument("New Document");
+        let title = doc.createElement("title");
+        title.textContent = document.getElementById("surveyname");
+
+        try{
+            doc.body.appendChild(title);
+        } catch(e){
+            console.log(e);
+        }
+
+        let destDocument = frame.contentDocument;
+        let srcNode = doc.documentElement;
+        let newNode = destDocument.importNode(srcNode, true);
+        destDocument.replaceChild(newNode, destDocument.documentElement);
+      }
     }
 </script>
     <body>
@@ -197,13 +238,20 @@
             </form>
         </div>
         <!--This is a form for text based questions.-->
-        <input type="button" onclick="TextBasedFunction()" value="Text Based">
-        <input type="button" onclick="ColourBasedFunction()" value="Colour Based">
-        <input type="button" onclick="MultipleChoiceFunctionNumber()" value="Multiple Choice">
-        <input type="button" onclick="DateBasedFunction()" value="Date Based">
-        <input type="button" onclick="EmailBasedFunction()" value="Email Based">
-        <input type="button" onclick="NumberBasedFunction()" value="Number Based">
-        <input type="button" onclick="FileBasedFunction()" value="File Based">
-        <input type = "submit">
+        <div>
+            <input type="button" onclick="TextBasedFunction()" value="Text Based">
+            <input type="button" onclick="ColourBasedFunction()" value="Colour Based">
+            <input type="button" onclick="MultipleChoiceFunctionNumber()" value="Multiple Choice">
+            <input type="button" onclick="DateBasedFunction()" value="Date Based">
+            <input type="button" onclick="EmailBasedFunction()" value="Email Based">
+            <input type="button" onclick="NumberBasedFunction()" value="Number Based">
+            <input type="button" onclick="FileBasedFunction()" value="File Based">
+            <div id = "addtome">
+            </div>
+        </div>
+        <div>
+            <input type = "button" onclick = "MakeSurveyPage()" value="Submit">
+        </div>
+        <iframe id="theFrame" src="about:blank">
     </body>
 </html> 
