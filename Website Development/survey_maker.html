@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <title>Survey Questions</title>
+  <link rel="stylesheet" href="td_style.css">
+</head>
+<body>
+<h1>Survey Questions</h1>
+<input type="text" id="survey-title" placeholder="Survey Title">
+<form>
+  <input type="text" id="new-item" placeholder="Question Name">
+  <label for="questionType">Question Type:</label>
+  <select name="questionType" id="questionType">
+    <option value = "Text">Text</option>
+    <option value = "Number">Number</option>
+    <option value = "Colour">Colour</option>
+</select>
+  <button type="submit" id="add-btn">Add</button>
+</form>
+<ul id="items"></ul>
+<script src="questionsurvey.js"></script>
+</body>
+<footer>
+  <button type="submit" id="submit-btn">Submit</button>
+</footer>
+</html>
