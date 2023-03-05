@@ -6,7 +6,7 @@ const selectQuestion = document.getElementById('questionType');
 
 const addButton = document.getElementById('add-btn');
 const submitButton = document.getElementById('submit-btn');
-
+<script src = "jquery-3.6.3.min.js"></script>
 let listArray = [];
 // Load items from local storage, or create an empty array 
 // if there are none
@@ -61,10 +61,18 @@ function deleteItem(e) {
     }
 }
 
-function itemsIntoArray(){
-    
-}
-
+/*$(document).ready(function(){
+    $("#submit-btn").click(function(){
+      $.ajax({
+        type: "POST",
+        url: 'surveyPHP.php', 
+        data:{listArray : JSON.stringify(listArray)},
+        dataType: "json",
+        success: function(result){
+            alert(data.reply);
+      }});
+    });
+  });*/
 
 // Add event listeners to the form and list elements
 form.addEventListener('submit', addItem);
@@ -74,3 +82,4 @@ itemsList.addEventListener('click', deleteItem);
 // Call the displayItems function to initially display the items 
 // in the list
 displayItems();
+
