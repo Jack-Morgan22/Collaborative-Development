@@ -31,6 +31,7 @@ const form = document.querySelector('form');
 const input = document.querySelector('#new-item');
 const itemsList = document.querySelector('#items');
 const selectQuestion = document.getElementById('questionType');
+const liSpan = document.getElementById('Number');
 
 const addButton = document.getElementById('add-btn');
 const submitButton = document.getElementById('submit-btn');
@@ -42,11 +43,13 @@ const items = JSON.parse(localStorage.getItem('items')) || [];
 // Display the items in the list
 function displayItems() {
     // Create an array of list items, one for each item in the items array
+    var questionValue = selectQuestion.options[selectQuestion.selectedIndex].value;
     const itemsHTML = items.map((item, index) => {
         // Each item in the array will be a list item with a span for
         // the text and a button for deleting
-        return ` <li> <span>${item}</span> <button class="delete-btn" data-index="${index}">Delete</button> </li> `;
+        return ` <li> <span id="${questionValue}" name="${item}">${item}</span> <button class="delete-btn" data-index="${index}">Delete</button> </li> `;
     });
+    console.log(liSpan);
     // Join the array of list items into a single string and add it to
     // the list element in the HTML
     itemsList.innerHTML = itemsHTML.join('');
@@ -59,9 +62,9 @@ function addItem(e) {
     // Get the text value from the input and trim any whitespace
     var questionValue = selectQuestion.options[selectQuestion.selectedIndex].value;
     var text = input.value.trim();
-    listArray.push(text +","+questionValue);
     if (text.length) {
         // Add the text to the items array
+        listArray.push(text +","+questionValue);
         items.push(text);
         // Clear the input field and display the updated list of items
         input.value = '';
@@ -77,10 +80,9 @@ function deleteItem(e) {
         // Get the index of the item from the data-index attribute
         // of the delete button
         const index = e.target.dataset.index;
-        // Remove the item from the items array and update local storage
+        // Remove the item from the items array
         listArray.splice(index, 1);
         items.splice(index, 1);
-        localStorage.setItem('items', JSON.stringify(items));
         // Display the updated list of items
         console.log(listArray);
         displayItems();
@@ -91,12 +93,13 @@ $(document).ready(function(){
     $("#submit-btn").click(function(){
       $.ajax({
         type: "POST",
-        url: 'survey.php', 
+        url: 'https://mi-linux.wlv.ac.uk/~2119668/survey.php', 
         data:{listArray : JSON.stringify(listArray)},
         dataType: "json",
         success: function(result){
             alert(data.reply);
       }});
+      $('#head2').html(result);
     });
   });
 
