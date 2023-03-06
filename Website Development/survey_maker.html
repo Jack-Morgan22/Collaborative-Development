@@ -36,6 +36,7 @@ const liSpan = document.getElementById('Number');
 const addButton = document.getElementById('add-btn');
 const submitButton = document.getElementById('submit-btn');
 let listArray = [];
+var jObject = {};
 // Load items from local storage, or create an empty array 
 // if there are none
 const items = JSON.parse(localStorage.getItem('items')) || [];
@@ -49,7 +50,6 @@ function displayItems() {
         // the text and a button for deleting
         return ` <li> <span id="${questionValue}" name="${item}">${item}</span> <button class="delete-btn" data-index="${index}">Delete</button> </li> `;
     });
-    console.log(liSpan);
     // Join the array of list items into a single string and add it to
     // the list element in the HTML
     itemsList.innerHTML = itemsHTML.join('');
@@ -64,13 +64,21 @@ function addItem(e) {
     var text = input.value.trim();
     if (text.length) {
         // Add the text to the items array
-        listArray.push(text +","+questionValue);
+        listArray.push(text);
+        listArray.push(questionValue);
         items.push(text);
         // Clear the input field and display the updated list of items
         input.value = '';
         displayItems();
     }
     console.log(listArray);
+}
+
+function arrayToObject(){
+    for(i in listArray){
+        jObject[i] = listArray[i];
+    }
+    jObject=JSON.stringify(jObject);
 }
 
 // Delete an item from the list
@@ -91,15 +99,16 @@ function deleteItem(e) {
 
 $(document).ready(function(){
     $("#submit-btn").click(function(){
+      console.log("button");
+      arrayToObject();
       $.ajax({
         type: "POST",
-        url: 'https://mi-linux.wlv.ac.uk/~2119668/survey.php', 
-        data:{listArray : JSON.stringify(listArray)},
+        url: 'survey.php', 
+        data:{jObject: jObject},
         dataType: "json",
         success: function(result){
             alert(data.reply);
       }});
-      $('#head2').html(result);
     });
   });
 
