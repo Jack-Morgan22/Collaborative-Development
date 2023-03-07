@@ -75,8 +75,8 @@ h3 {
 		$Name = stripslashes($_REQUEST['Name']);
         $Name = mysqli_real_escape_string($con, $Name);
         $JoinDate = date("Y-m-d H:i:s");
-        $query    = "INSERT into `Users` (UserID, Username, Password, Name, JoinDate, Email)
-                     VALUES (NULL, 'ExampleUsername', 'ExamplePassword', 'ExampleName', now(), 'ExampleEmail')";
+        $query    = $query    = "INSERT into `Users` (Username, Password, Email, Name, JoinDate)
+                     VALUES ('$Username', '" . md5($Password) . "', '$Email', '$Name', '$JoinDate')";
         $result   = mysqli_query($con, $query);
         if ($result) {
             echo "<div class='form'>
@@ -93,10 +93,11 @@ h3 {
 ?>
     <form class="form" action="" method="post">
         <h1 class="login-title">Registration</h1>
-        <input type="text" class="login-input" name="username" placeholder="Username" required />
-        <input type="text" class="login-input" name="email" placeholder="Email Adress">
-        <input type="password" class="login-input" name="password" placeholder="Password">
-		<input type=" Confilm password" class="login-input" name="password" placeholder="Confilm Password">
+        <input type="text" class="login-input" name="Username" placeholder="Username" required />
+		<input type="text" class="login-input" name="Name" placeholder="Name">
+        <input type="text" class="login-input" name="Email" placeholder="Email Adress">
+        <input type="password" class="login-input" name="Password" placeholder="Password">
+		<input type="password" class="login-input" name="Confirm password" placeholder="Confirm password">
         <input type="submit" name="submit" value="Register" class="login-button">
         <p class="link"><a href="login.php">Click to Login</a></p>
     </form>
