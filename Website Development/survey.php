@@ -4,13 +4,16 @@
     if (mysqli_connect_errno()){
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
-    function(){
-        $data = json_decode($_POST['jObject'], true);
-        $surveyname = $_GET['survey-title'];
-        var_dump(isset($surveyname));
-        var_dump(isset($data));
-        $sql = "INSERT INTO `SurveyDetails` (`SurveyID`, `SurveyName`, `CreationDate`, `UploadStatus`, `UploadDate`, `Users_UserID`) VALUES (NULL, '$surveytitle', 'now()', 'Y', NULL, '2023502400')";
-        //$sql = "INSERT INTO `SurveyQuestions` (`QuestionNumber`, `QuestionName`, `QuestionType`, `QuestionStatus`, `SurveyDetails_SurveyID`) VALUES (' ', ' ', ' ', ' ', ' ')";
-        mysqli_connect($con, $sql);
+    if($_SERVER['REQUEST_METHOD']=== 'POST'){
+        $data = json_decode(file_get_contents('php://input', true));
+        var_dump()
+    }else{
+        echo('Invalid data.');
     }
+    $surveyname = stripslashes($_REQUEST['survey-title']);
+    $surveyname = mysqli_real_escape_string($con, $surveyname);
+    $sql = "INSERT INTO `SurveyDetails` (`SurveyID`, `SurveyName`, `CreationDate`, `UploadStatus`, `UploadDate`, `Users_UserID`) VALUES (NULL, '$surveytitle', 'now()', 'Y', NULL, '2023502400')";
+    //$sql = "INSERT INTO `SurveyQuestions` (`QuestionNumber`, `QuestionName`, `QuestionType`, `QuestionStatus`, `SurveyDetails_SurveyID`) VALUES (' ', ' ', ' ', ' ', ' ')";
+    mysqli_query($con, $sql);
+    
 ?>
