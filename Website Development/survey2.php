@@ -6,26 +6,58 @@
   <link rel="stylesheet" href="td_style.css">
 </head> 
 <body>
-<h1>Survey Questions</h1>
-<input type="text" id="survey-title" placeholder="Survey Title" name="survey-title">
-<form>
-  <input type="text" id="new-item" placeholder="Question Name">
-  <label for="questionType">Question Type:</label>
-  <select name="questionType" id="questionType">
-    <option value = "Text">Text</option>
-    <option value = "Number">Number</option>
-    <option value = "Colour">Colour</option>
-</select>
-  <button type="submit" id="add-btn">Add</button>
-</form>
-<ul id="items"></ul>
-</body>
-<footer>
-<form action = "survey.php" method="post">
-  <button type="submit" id="submit-btn" name="submit-btn">Submit</button>
-</form>
-</footer>
-</html>
+    <?php
+        require('db.php');
+        if(isset($_REQUEST['surveytitle'])){
+            $questionarray = [];
+            $surveyname = stripslashes($_REQUEST['surveytitle']);
+            //$surveyname = mysqli_real_escape_string($con, $surveyname);
+            $sql = $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID) 
+                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '2023502400')";
+                $result = mysqli_query($con, $sql); 
+            }
+            if(isset($_REQUEST['arraytext'])){
+                $surveyID = 'SELECT SurveyID FROM SurveyDetails';
+                $result = mysqli_query($con, $surveyID);
+                while($row = mysqli_fetch_assoc($result)){
+                    $surveyID = $row['SurveyID'];
+                }
+                $questions = stripslashes($_REQUEST['arraytext']);
+                $questionarray = explode('|||', $questions);
+                $questionarray = array_filter($questionarray);
+                $i = 0;
+                $y = 1;
+                $questionnumber = 1;
+                $arrayLength = count($questionarray);
+                while($i < $arrayLength)
+                {
+                    $sql = "INSERT INTO `SurveyQuestions` (QuestionNumber, QuestionName, QuestionType, QuestionStatus, SurveyDetails_SurveyID) 
+                    VALUES ('$questionnumber', '$questionarray[$i]', '$questionarray[$y]', 'M', '$surveyID')";
+                    $questionnumber++;
+                    $y = $y + 2;
+                    $i = $i + 2;
+                    $result = mysqli_query($con, $sql);
+                }
+            }          
+    ?>
+    <h1>Survey Questions</h1>
+    <form>
+        <input type = 'text' placeholder = 'Survey Title' id = 'surveytitle' name = 'surveytitle' form = 'submitForm'>
+        <input type="text" id="new-item" placeholder="Question Name">
+            <label for="questionType">Question Type:</label>
+            <select name="questionType" id="questionType">
+                <option value = "TX">Text</option>
+                <option value = "NM">Number</option>
+                <option value = "CL">Colour</option>
+            </select>
+        <button type="submit" id="add-btn">Add</button>
+        <ul id="items"></ul>
+    </form>
+    <form  action = '' method = 'post' id = 'submitForm' name = 'submitForm'>
+        <input type = 'text' id = 'arraytext' name = 'arraytext' value = '' hidden>
+        <button type = 'submit' id = 'submitbtn' name = 'submitbtn'>Submit</button>
+    </form>
+
 <script>
   // Select the form, input, and list elements from the HTML
 const form = document.querySelector('form');
@@ -34,10 +66,12 @@ const itemsList = document.querySelector('#items');
 const selectQuestion = document.getElementById('questionType');
 const liSpan = document.getElementById('Number');
 
+const arraystringvalue = document.getElementById('arraytext');
+
 const addButton = document.getElementById('add-btn');
 const submitButton = document.getElementById('submit-btn');
 let listArray = [];
-var jObject = {};
+var arraystring = '';
 // Load items from local storage, or create an empty array 
 // if there are none
 const items = JSON.parse(localStorage.getItem('items')) || [];
@@ -65,14 +99,16 @@ function addItem(e) {
     var text = input.value.trim();
     if (text.length) {
         // Add the text to the items array
-        listArray.push(text);
-        listArray.push(questionValue);
+        listArray.push(text + '|||' + questionValue + '|||');
         items.push(text);
         // Clear the input field and display the updated list of items
         input.value = '';
         displayItems();
+        arraystring = '';
+        listArray.forEach((i) => 
+            arraystring = arraystring + i);
     }
-    console.log(listArray);
+    arraystringvalue.value = arraystring;
 }
 
 function arrayToObject(){
@@ -98,25 +134,6 @@ function deleteItem(e) {
     }
 }
 
-$(document).ready(function(){
-    $("#submit-btn").click(function(){
-      console.log("button");
-      arrayToObject();
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'survey.php');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.onload = function(){
-        if(xhr.status === 200){
-          console.log(xhr.responseText);
-        } else{
-          console.log('Request failed. Returned state of ' + xhr.status);
-        }
-      };
-      xhr.send(JSON.stringify(listArray));
-      }
-    );
-  });
-
 // Add event listeners to the form and list elements
 form.addEventListener('submit', addItem);
 //form.addEventListener(submitButton, itemsIntoArray);
@@ -128,3 +145,5 @@ displayItems();
 
 
 </script>
+</body>
+</html>

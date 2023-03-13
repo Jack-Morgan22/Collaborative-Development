@@ -1,43 +1,13 @@
-<!DOCTYPE html>
-<html lang="eng">
-<head>
-  <script src = "jquery-3.6.3.min.js"></script>
-  <title>Survey Questions</title>
-  <link rel="stylesheet" href="td_style.css">
-</head> 
-<body>
-<h1>Survey Questions</h1>
-<input type="text" id="survey-title" placeholder="Survey Title" name="survey-title">
-<form>
-  <input type="text" id="new-item" placeholder="Question Name">
-  <label for="questionType">Question Type:</label>
-  <select name="questionType" id="questionType">
-    <option value = "Text">Text</option>
-    <option value = "Number">Number</option>
-    <option value = "Colour">Colour</option>
-</select>
-  <button type="submit" id="add-btn">Add</button>
-</form>
-<ul id="items"></ul>
-</body>
-<footer>
-<form action = "survey.php" method="post">
-  <button type="submit" id="submit-btn" name="submit-btn">Submit</button>
-</form>
-</footer>
-</html>
-<script>
-  // Select the form, input, and list elements from the HTML
+// Select the form, input, and list elements from the HTML
 const form = document.querySelector('form');
 const input = document.querySelector('#new-item');
 const itemsList = document.querySelector('#items');
 const selectQuestion = document.getElementById('questionType');
-const liSpan = document.getElementById('Number');
 
 const addButton = document.getElementById('add-btn');
 const submitButton = document.getElementById('submit-btn');
+<script src = "jquery-3.6.3.min.js"></script>
 let listArray = [];
-var jObject = {};
 // Load items from local storage, or create an empty array 
 // if there are none
 const items = JSON.parse(localStorage.getItem('items')) || [];
@@ -45,11 +15,10 @@ const items = JSON.parse(localStorage.getItem('items')) || [];
 // Display the items in the list
 function displayItems() {
     // Create an array of list items, one for each item in the items array
-    var questionValue = selectQuestion.options[selectQuestion.selectedIndex].value;
     const itemsHTML = items.map((item, index) => {
         // Each item in the array will be a list item with a span for
         // the text and a button for deleting
-        return ` <li> <span id="${questionValue}" name="${item}">${item}</span> <button class="delete-btn" data-index="${index}">Delete</button> </li> `;
+        return ` <li> <span>${item}</span> <button class="delete-btn" data-index="${index}">Delete</button> </li> `;
     });
     // Join the array of list items into a single string and add it to
     // the list element in the HTML
@@ -63,23 +32,16 @@ function addItem(e) {
     // Get the text value from the input and trim any whitespace
     var questionValue = selectQuestion.options[selectQuestion.selectedIndex].value;
     var text = input.value.trim();
+    listArray.push(text +","+questionValue);
     if (text.length) {
-        // Add the text to the items array
-        listArray.push(text);
-        listArray.push(questionValue);
+        // Add the text to the items array and store it in local storage
         items.push(text);
+        localStorage.setItem('items', JSON.stringify(items));
         // Clear the input field and display the updated list of items
         input.value = '';
         displayItems();
     }
     console.log(listArray);
-}
-
-function arrayToObject(){
-    for(i in listArray){
-        jObject[i] = listArray[i];
-    }
-    jObject=JSON.stringify(jObject);
 }
 
 // Delete an item from the list
@@ -89,33 +51,28 @@ function deleteItem(e) {
         // Get the index of the item from the data-index attribute
         // of the delete button
         const index = e.target.dataset.index;
-        // Remove the item from the items array
+        // Remove the item from the items array and update local storage
         listArray.splice(index, 1);
         items.splice(index, 1);
+        localStorage.setItem('items', JSON.stringify(items));
         // Display the updated list of items
         console.log(listArray);
         displayItems();
     }
 }
 
-$(document).ready(function(){
+/*$(document).ready(function(){
     $("#submit-btn").click(function(){
-      console.log("button");
-      arrayToObject();
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'survey.php');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.onload = function(){
-        if(xhr.status === 200){
-          console.log(xhr.responseText);
-        } else{
-          console.log('Request failed. Returned state of ' + xhr.status);
-        }
-      };
-      xhr.send(JSON.stringify(listArray));
-      }
-    );
-  });
+      $.ajax({
+        type: "POST",
+        url: 'surveyPHP.php', 
+        data:{listArray : JSON.stringify(listArray)},
+        dataType: "json",
+        success: function(result){
+            alert(data.reply);
+      }});
+    });
+  });*/
 
 // Add event listeners to the form and list elements
 form.addEventListener('submit', addItem);
@@ -126,5 +83,3 @@ itemsList.addEventListener('click', deleteItem);
 // in the list
 displayItems();
 
-
-</script>
