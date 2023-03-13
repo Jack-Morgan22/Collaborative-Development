@@ -8,23 +8,31 @@
 <body>
     <?php
         require('db.php');
+        // If the survey title is requested it will call this code.
         if(isset($_REQUEST['surveytitle'])){
+            // This sets the question array.
             $questionarray = [];
+            // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
-            //$surveyname = mysqli_real_escape_string($con, $surveyname);
+            // This is the SQL syntax to insert into the survey details.
             $sql = $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID) 
                 VALUES (NULL, '$surveyname', now(), 'Y', NULL, '2023502400')";
+                // This puts the SQL syntax into the database.
                 $result = mysqli_query($con, $sql); 
             }
+            // If arraytext is requested it will call this code.
             if(isset($_REQUEST['arraytext'])){
+                // This selects the surveyID from the database.
                 $surveyID = 'SELECT SurveyID FROM SurveyDetails';
                 $result = mysqli_query($con, $surveyID);
                 while($row = mysqli_fetch_assoc($result)){
                     $surveyID = $row['SurveyID'];
                 }
+                //This get's all the questions and seperates them into an array.
                 $questions = stripslashes($_REQUEST['arraytext']);
                 $questionarray = explode('|||', $questions);
                 $questionarray = array_filter($questionarray);
+                //This goes through the array and adds the data to the database in order.
                 $i = 0;
                 $y = 1;
                 $questionnumber = 1;
@@ -57,7 +65,6 @@
         <input type = 'text' id = 'arraytext' name = 'arraytext' value = '' hidden>
         <button type = 'submit' id = 'submitbtn' name = 'submitbtn'>Submit</button>
     </form>
-
 <script>
   // Select the form, input, and list elements from the HTML
 const form = document.querySelector('form');
@@ -66,15 +73,15 @@ const itemsList = document.querySelector('#items');
 const selectQuestion = document.getElementById('questionType');
 const liSpan = document.getElementById('Number');
 
+// Select the arraytext input and buttons
 const arraystringvalue = document.getElementById('arraytext');
-
 const addButton = document.getElementById('add-btn');
 const submitButton = document.getElementById('submit-btn');
+
+// This makes the empty arrays and strings.
 let listArray = [];
 var arraystring = '';
-// Load items from local storage, or create an empty array 
-// if there are none
-const items = JSON.parse(localStorage.getItem('items')) || [];
+const items = [];
 
 // Display the items in the list
 function displayItems() {
@@ -109,13 +116,6 @@ function addItem(e) {
             arraystring = arraystring + i);
     }
     arraystringvalue.value = arraystring;
-}
-
-function arrayToObject(){
-    for(i in listArray){
-        jObject[i] = listArray[i];
-    }
-    jObject=JSON.stringify(jObject);
 }
 
 // Delete an item from the list
