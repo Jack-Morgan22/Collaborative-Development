@@ -8,23 +8,22 @@
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
   <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="stylesheet" href="td_style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <div id="main">
     <div id="header">
       <div id="logo">
-        <h1><a href="#">Survey4All</a></h1>
+        <a href="homepage.html"><img src="Website Logo.png" alt="logo" 
+          width="300"
+          length="100">
+          </a>
       </div>
-      <div class="wrap">
-        <div class="search">
-           <input type="text" class="searchTerm" placeholder="Search for a survey...">
-             <i class="fa fa-search"></i>
-          </button>
-        </div>
-     </div>
       <div id="menubar">
         <ul id="menu">
-          <li><a href="Home page.html">Home</a></li>
+          <li><a href="homepage.html">Home</a></li>
           <li><a href="creator.html">Create A Survey</a></li>
           <li class="current"><a href="Log In.html">Log In/Sign Up</a></li> 
           <li><a href="contact.html">Contact</a></li>  
@@ -32,14 +31,48 @@
       </div>
     </div>
     <div id="site_content">
-      <iframe src="logsign.html" width="100%" height="300">
-        <p>Your browser does not support iframes.</p>
-      </iframe>
+      <meta charset="utf-8"/>
+      <title>Login</title>
+      <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+  <?php
+      require('db.php');
+      session_start();
+      // When the form submitted it will check and create user session within the Registration\Login system.
+      if (isset($_POST['Username'])) {
+          $Username = stripslashes($_REQUEST['Username']);    // removes backslashes
+          $Username = mysqli_real_escape_string($con, $Username);
+          $Password = stripslashes($_REQUEST['Password']);
+          $Password = mysqli_real_escape_string($con, $Password);
+          // This will check if the user exists in the database.
+          $query    = "SELECT * FROM `Users` WHERE Username='$Username'
+                       AND Password='" . md5($Password) . "'";
+          $result = mysqli_query($con, $query) or die(mysql_error());
+          $rows = mysqli_num_rows($result);
+          if ($rows == 1) {
+              $_SESSION['Username'] = $Username;
+              // If login is correct it will redirect to user dashboard page.
+              header("Location: dashboard.php");
+          } else {
+              echo "<div class='form'>
+                    <h3>Incorrect Username/password.</h3><br/>
+                    <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                    </div>";
+          }
+      } else {
+  ?>
+      <form class="form" method="post" name="login">
+          <h1 class="login-title">Login</h1>
+          <input type="text" class="login-input" name="Username" placeholder="Username" autofocus="true"/>
+          <input type="password" class="login-input" name="Password" placeholder="Password"/>
+          <input type="submit" value="Login" name="submit" class="login-button"/>
+          <p class="link"><a href="registration.php">New Registration</a></p>
+    </form>
+  <?php
+      }
       <div id="sidebar_container">
       </div>
-        </ul>
-      </div>
-    </div>
     <div id="footer">
     </div>
   </div>
