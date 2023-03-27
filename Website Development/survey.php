@@ -59,7 +59,22 @@
                 <option value = "CL">Colour</option>
                 <option value = "EM">Email</option>
                 <option value = "DT">Date</option>
+                <option value = "FL">File</option>
+                <option value = "MC">Multiple Choice</option>
             </select>
+            <form id = 'MCform' hidden>
+                <select id = "MultipleChoiceSelector">
+                    <option value = "M2"></option>
+                    <option value = "M3"></option>
+                    <option value = "M4"></option>
+                    <option value = "M5"></option>
+                    <option value = "M6"></option>
+                    <option value = "M7"></option>
+                    <option value = "M8"></option>
+                    <option value = "M9"></option>
+                </select>
+                <button type = 'submit' id = 'MCbtn' name = 'MCbtn'>Select</button>
+            </form>
         <button type="submit" id="add-btn">Add</button>
         <ul id="items"></ul>
     </form>
@@ -74,6 +89,8 @@ const input = document.querySelector('#new-item');
 const itemsList = document.querySelector('#items');
 const selectQuestion = document.getElementById('questionType');
 const liSpan = document.getElementById('Number');
+const MCSelector = document.getElementById('MultipleChoiceSelector');
+const MCForm = document.getElementById('MCform');
 
 // Select the arraytext input and buttons
 const arraystringvalue = document.getElementById('arraytext');
@@ -105,6 +122,9 @@ function addItem(e) {
     e.preventDefault();
     // Get the text value from the input and trim any whitespace
     var questionValue = selectQuestion.options[selectQuestion.selectedIndex].value;
+    if (questionValue == "MC"){
+        MCForm.removeAttribute("hidden");
+    }
     var text = input.value.trim();
     if (text.length) {
         // Add the text to the items array
