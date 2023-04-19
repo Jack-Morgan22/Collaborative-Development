@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="177bea2c-53f7-4e51-960b-9057089649f2" name="mi-linux.wlv.ac.uk" url="http://mi-linux.wlv.ac.uk">
+        <fileTransfer host="mi-linux.wlv.ac.uk" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
