@@ -60,21 +60,7 @@
                 <option value = "EM">Email</option>
                 <option value = "DT">Date</option>
                 <option value = "FL">File</option>
-                <option value = "MC">Multiple Choice</option>
             </select>
-            <form id = 'MCform' hidden>
-                <select id = "MultipleChoiceSelector">
-                    <option value = "M2"></option>
-                    <option value = "M3"></option>
-                    <option value = "M4"></option>
-                    <option value = "M5"></option>
-                    <option value = "M6"></option>
-                    <option value = "M7"></option>
-                    <option value = "M8"></option>
-                    <option value = "M9"></option>
-                </select>
-                <button type = 'submit' id = 'MCbtn' name = 'MCbtn'>Select</button>
-            </form>
         <button type="submit" id="add-btn">Add</button>
         <ul id="items"></ul>
     </form>
