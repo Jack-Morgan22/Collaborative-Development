@@ -63,7 +63,7 @@
             transition: background-color 0.3s ease-in-out;
         }
 
-        .navbutton {
+        .navbutton, .dropbtn {
             background-color: #009891;
             border: none;
             color: white;
@@ -77,7 +77,30 @@
             transition-duration: 0.4s;
         }
 
-        .navbutton:hover {
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #009891;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .navbutton:hover, .dropbtn:hover {
             background-color: white;
             color: black;
         }
@@ -108,7 +131,14 @@
                 <button class="navbutton" id="cs">Create Surveys</button>
                 <button class="navbutton" id="contact">Contact Us</button>
                 <button class="navbutton" id="va">View Account</button>
-                <button class="navbutton" id="legal">Legal</button>
+                <div class="dropdown">
+                    <button class="dropbtn" id="legal">Legal</button>
+                    <div class="dropdown-content">
+                        <button class="navbutton" id="tos">Terms of Service</button>
+                        <button class="navbutton" id="priv">Privacy Policy</button>
+                        <button class="navbutton" id="cook">Cookie Use Policy</button>
+                    </div>
+                </div>
             </li>
         </ul>
     </nav>
@@ -126,14 +156,22 @@
             <p>Creating Surveys will go here</p>
         </div>
         <div class="section" id="contactframe">
-            <iframe src="Contact.html" class="frames"></iframe>
+            <iframe src="https://mi-linux.wlv.ac.uk/~2112834/Contact.html" class="frames"></iframe>
         </div>
         <div class="section" id="vaframe">
             <h1>Example Frame</h1>
             <p>Viewing Account will go here</p>
         </div>
-        <div class="section" id="termsframe">
-            <iframe src="Terms%20and%20conditions%20.html" class="frames"></iframe>
+        <div class="section" id="tosframe">
+            <iframe src="https://mi-linux.wlv.ac.uk/~2112834/Termsandconditions.html" class="frames"></iframe>
+        </div>
+        <div class="section" id="privframe">
+            <h1>Example Frame</h1>
+            <p>Privacy Policy will go here</p>
+        </div>
+        <div class="section" id="cookframe">
+            <h1>Example Frame</h1>
+            <p>Cookie Use Policy will go here</p>
         </div>
     </div>
     <script>
@@ -143,7 +181,9 @@
             create.style.display = "none";
             contact.style.display = "none";
             account.style.display = "none";
-            legal.style.display = "none";
+            tos.style.display = "none";
+            privacy.style.display = "none";
+            cookie.style.display = "none";
             section.style.display = "block";
         }
 
@@ -152,13 +192,17 @@
         const B3 = document.getElementById("cs");
         const B4 = document.getElementById("contact");
         const B5 = document.getElementById("va");
-        const B6 = document.getElementById("legal");
+        const B6A = document.getElementById("tos");
+        const B6B = document.getElementById("priv");
+        const B6C = document.getElementById("cook");
         const home = document.getElementById("homeframe");
         const view = document.getElementById("vsframe");
         const create = document.getElementById("csframe");
         const contact = document.getElementById("contactframe");
         const account = document.getElementById("vaframe");
-        const legal = document.getElementById("termsframe");
+        const tos = document.getElementById("tosframe");
+        const privacy = document.getElementById("privframe");
+        const cookie = document.getElementById("cookframe");
 
         B1.addEventListener("click", () => {
             showSection(home);
@@ -175,8 +219,14 @@
         B5.addEventListener("click", () => {
             showSection(account);
         });
-        B6.addEventListener("click", () => {
-            showSection(legal);
+        B6A.addEventListener("click", () => {
+            showSection(tos);
+        });
+        B6B.addEventListener("click", () => {
+            showSection(privacy);
+        });
+        B6C.addEventListener("click", () => {
+            showSection(cookie);
         });
     </script>
 </body>
