@@ -18,7 +18,7 @@
 
     // Get data, convert to JSON and print
     $row = $result -> fetch_assoc();
-    print json_encode($row);
+    echo json_encode($row);
 
     // Free result set and close connection
     $result -> free_result();
