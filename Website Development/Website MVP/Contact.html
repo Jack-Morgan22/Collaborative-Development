@@ -1,60 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
- 
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
-    <style>
-        form {
-            width: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        form * {
-            width: 100%;
-            margin-top: 2px;
-        }
-    </style>
+  <title><img src="Website Logo.png"></title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="stylesheet" href="td_style.css">
 </head>
- 
 <body>
-    <form>
-        <h2>Contact Us</h2>
-        <span class="message"></span>
-        <input type="text" name="name" placeholder='Name..'>
-        <input type="email" name="email" placeholder='Email..'>
-        <textarea name="message" cols="30" rows="10" placeholder='Message..'></textarea>
-        <input type="submit" class="submit">
-    </form>
-    <script>
-        let url = "https://script.google.com/macros/s/AKfycbwwP5rrsfURaDdWNIO_QNKUpfdxD2wqn-MUcSNV46HWdVrFOpiPFmuI3AYmXBgoJwWhLA/exec";
-        let form = document.querySelector("form");
-        let submit = document.querySelector(".submit");
-        let message = document.querySelector(".message");
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            submit.value = "submitting.."
-            fetch(url, {
-                    method: "POST",
-                    body: new FormData(form)
-                })
-                .then(res => res.text())
-                .then(data => {
-                    message.innerHTML = data;
-                    submit.value = "submit"
- 
-                })
-                .catch(err => {
-                    message.innerHTML = err;
-                    submit.value = "submit"
-                })
-        })
-    </script>
+<div id="main">
+  <div id="header">
+    <div id="logo">
+      <a href="homepage.html"><img src="Website Logo.png" alt="logo"
+                                   width="300"
+                                   length="100">
+      </a>
+    </div>
+    <div class="wrap">
+      <div class="search">
+        <input type="text" class="searchTerm" placeholder="Search for a survey...">
+        <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <div id="menubar">
+      <ul id="menu">
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="creator.html">Create A Survey</a></li>
+        <li><a href="Log In.html">Log In/Sign Up</a></li>
+        <li class="current"><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div id="site_content">
+      <h2>c.m.moore@wlv.ac.uk <br>
+        j.m.morgan@wlv.ac.uk <br>
+        k.d.ransley@wlv.ac.uk <br>
+        j.j.hewitt@wlv.ac.uk <br>
+        k.grudzinski@wlv.ac.uk <br>
+        g.boratynski@wlv.ac.uk <br>
+        s.dixon8@wlv.ac.uk
+      </h2>
+      <div id="sidebar_container">
+      </div>
+      </ul>
 </body>
- 
 </html>
