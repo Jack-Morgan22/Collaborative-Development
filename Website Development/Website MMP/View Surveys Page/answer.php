@@ -5,47 +5,6 @@
         <link rel="stylesheet" href="td_style.css">
     </head>
     <body>
-        <?php/*
-        //Connects to the database.
-        $conn = mysqli_connect("localhost", "2112834", "85rj5j", "db2112834");
-        if(!$conn){
-            echo "Connection error," . mysqli_connect_error();
-        }
-        //Sets an array
-        $answerarray = [];
-        //Checks to see if they have been set
-        if(isset($_REQUEST['number'])){
-            if(isset($_REQUEST['survey'])){
-                //Requests data and strips slashes from data
-                $number = stripslashes($_REQUEST['number']);
-                $surveyname = stripslashes($_REQUEST['survey']);
-                //Setting some basic variables
-                $i = 1;
-                $x = 0;
-                //This should go through the entire range of the unordered list and get every answer.
-                while($x < $number)
-                {
-                    $tempVar = stripslashes($_REQUEST["$x"]);
-                    array_push($answerarray, $tempVar);
-                    $x = $x + 1;
-                    $i = $i + 1;
-                }
-                //This takes the variable
-                $detailsarray = explode('|||', $details);
-                $detailsarray = array_filter($detailsarray);
-                $i = 0;
-                $questionnumber = 1;
-                while($i < $number)
-                {
-                    $sql = "INSERT INTO `SurveyAnswers` (QuestionNumber, QuestionAnswer, SurveyQuestions_QuestionName, SurveyDetails_SurveyID)
-                    VALUES ('$questionnumber','$answerarray[$i]','$detailsarray[$i]','$surveyname')";
-                    $i = $i + 1;
-                    $questionnumber = $questionnumber + 1;
-                    $result = mysqli_query($conn, $sql);
-                }
-            }
-        }*/
-        ?>
         <form id="phpForm" method="post" onsubmit="sortingAnswers()">
             <div id = "Questions">
                 <ul></ul>
@@ -116,15 +75,15 @@
             });
         });
         function sortingAnswers(){
-            const answerText = document.getElementById("Answers");
-            theAnswers = document.getElementsByClassName('answers');
-            answerString = "";
-            i = 0;
-            while(i < theAnswers.length){
-                answerString = answerString + theAnswers[i] + "|||";
+            var answers = [];
+            var answerboxes = document.getElementsByName('answers[]');
+            var i = 0;
+            if(i < checkboxes.length){
+                items.push(answerboxes[i].value);
+                i++;
             }
-            answerText.setAttribute("value", answerString);
-            console.log(answerString);
+            document.getElementById("Answers").value = JSON.stringify(items);
+            console.log(items);
         }
     </script>
     <?php
@@ -141,12 +100,10 @@
                     $Number = $_POST['number'];
                     $detailsString = $_POST['details'];
                     $detailsArray = [];
-                    $answerArray = [];
+                    $answerArray = json_decode($_POST['Answers']);
                     $answerString = $_POST['Answers'];
                     $detailsArray = explode('|||', $detailsString);
                     $detailsArray = array_filter($detailsArray);
-                    $answerArray = explode('|||', $answerString);
-                    $answerArray = array_filter($answerArray);
                     $i = 0;
                     $x = 1;
                     while($i < $Number){
