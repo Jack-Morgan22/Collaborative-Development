@@ -17,6 +17,39 @@
             padding: 0;
         }
 
+        .popup {
+            background-color: #00fff3;
+            width: 450px;
+            padding: 30px 40px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            border-radius: 8px;
+            font-family: "Poppins",sans-serif;
+            display: none;
+            text-align: center;
+        }
+
+        .popup button {
+            display: block;
+            margin:  0 0 20px auto;
+            background-color: transparent;
+            font-size: 30px;
+            color: black;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .popup p {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: justify;
+            margin: 20px 0;
+            line-height: 25px;
+        }
+
         .login, .register {
             text-align: center;
             padding: 10px 35px;
@@ -122,6 +155,21 @@
     </style>
 </head>
 <body onload="showSection(home)">
+    <div class="popup">
+        <button id="close">&times;</button>
+        <h2>Alert</h2>
+        <p>
+            By using the website you are agreeing to the Terms of Service, Privacy Policy, and Cookie Use Policy.
+            <br><br>
+            They can be found here:
+            <br>
+            <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/termsofservice.html">Terms of Service</a>
+            <br>
+            <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/privacypolicy.html">Privacy Policy</a>
+            <br>
+            <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/cookieusepolicy.html">Cookie Use Policy</a>
+        </p>
+    </div>
     <header>
         <img src="Survey4AllLogo.png" alt="Logo" class="logo">
         <input type="button" class="register" value="Register" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/registration.php';">
@@ -166,16 +214,26 @@
             <p>Viewing Account will go here</p>
         </div>
         <div class="section" id="tosframe">
-            <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/tos.html" class="frames"></iframe>
+            <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/termsofservice.html" class="frames"></iframe>
         </div>
         <div class="section" id="privframe">
-            <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/privacy.html" class="frames"></iframe>
+            <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/privacypolicy.html" class="frames"></iframe>
         </div>
         <div class="section" id="cookframe">
-            <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/cookie.html" class="frames"></iframe>
+            <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/cookieusepolicy.html" class="frames"></iframe>
         </div>
     </div>
     <script>
+        window.addEventListener("load", function(){
+            setTimeout(
+                function open(event){
+                    document.querySelector(".popup").style.display = "block";
+                },
+            )
+        });
+        document.querySelector("#close").addEventListener("click", function(){
+            document.querySelector(".popup").style.display = "none";
+        });
         function showSection(section) {
             home.style.display = "none";
             view.style.display = "none";
