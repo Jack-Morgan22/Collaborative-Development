@@ -7,9 +7,13 @@
 
     $id = htmlspecialchars($_GET['id']);
 
-    $sql = 'SELECT `SurveyName` FROM `SurveyDetails` WHERE SurveyID = "'.$id.'"';
+    $sql = 'SELECT * FROM `SurveyQuestions` WHERE SurveyDetails_SurveyID = "'.$id.'"';
 
     $result = mysqli_query($conn, $sql);
+
+    while($row = mysqli_fetch_assoc($result)){
+        $json[] = $row;
+    }
 
     // Error ?
     if($result == null) {
@@ -17,8 +21,7 @@
     }
 
     // Get data, convert to JSON and print
-    $row = $result -> fetch_assoc();
-    echo json_encode($row);
+    print json_encode($json);
 
     // Free result set and close connection
     $result -> free_result();

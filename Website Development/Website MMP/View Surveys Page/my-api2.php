@@ -21,7 +21,7 @@
     }
 
     // Get data, convert to JSON and print
-    print json_encode($json);
+    echo json_encode($json);
 
     // Free result set and close connection
     $result -> free_result();
