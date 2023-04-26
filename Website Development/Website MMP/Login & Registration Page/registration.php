@@ -98,19 +98,23 @@ h3 {
     } else {
 ?>
   <form class="form" action="" method="post">
-        <h1 class="login-title">Registration</h1>
-        <input type="text" class="login-input" name="Username" placeholder="Username" required />
-		<input type="text" class="login-input" name="Name" placeholder="Name" required />
-        <input type="text" class="login-input" name="Email" placeholder="Email Adress" required />
-        <input type="password" class="login-input" name="Password" placeholder="Password" required />
-		<input type="password" class="login-input" name="Confirm password" placeholder="Confirm password">
-        <input type="submit" name="submit" value="Register" class="login-button">
-        <p class="link"><a href="login.php">Click to Login</a></p>
-		<label>
-		<input type="checkbox" name="agree" value="yes" required>I read, understood and agree with the Terms of Service, Privacy Policy and Cookie Use Policy found on the LEGAL page.
-		 <p class="link"><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Legal</a></p>
-		</label>
-    </form>
+  <h1 class="login-title">Registration</h1>
+  <input type="text" class="login-input" name="Username" placeholder="Username" required />
+  <input type="text" class="login-input" name="Name" placeholder="Name" required />
+  <input type="text" class="login-input" name="Email" placeholder="Email Adress" required />
+  <input type="password" class="login-input" name="Password" placeholder="Password" required />
+  <input type="password" class="login-input" name="Confirm password" placeholder="Confirm password">
+  <input type="submit" name="submit" value="Register" class="login-button">
+  <p class="link"><a href="login.php">Click to Login</a></p>
+  <label>
+    <input type="checkbox" name="agree" value="yes" required>I read, understood and agree with the Terms of Service, Privacy Policy and Cookie Use Policy found on the Hyperlinks.
+	<br>
+	<br>
+    <a href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_termsofservice.html">Terms of service</a> 
+    <a href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_privacypolicy.html">Privacy Policy</a> 
+    <a href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_cookieusepolicy.html">Cookie use Policy</a>
+  </label>
+</form>
 	
 	
 	
