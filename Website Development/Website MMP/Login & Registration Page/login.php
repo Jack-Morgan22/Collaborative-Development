@@ -92,6 +92,7 @@ h3 {
         <input type="Password" class="login-input" name="Password" placeholder="Password"/>
         <input type="submit" value="Login" name="submit" class="login-button"/>
         <p class="link"><a href="registration.php">New Registration</a></p>
+		<p class="link"><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Home</a></p>
   </form>
 <?php
     }
