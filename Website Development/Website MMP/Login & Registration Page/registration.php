@@ -106,6 +106,7 @@ h3 {
   <input type="password" class="login-input" name="Confirm password" placeholder="Confirm password">
   <input type="submit" name="submit" value="Register" class="login-button">
   <p class="link"><a href="login.php">Click to Login</a></p>
+   <p class="link"><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Home</a></p>
   <label>
     <input type="checkbox" name="agree" value="yes" required>I read, understood and agree with the Terms of Service, Privacy Policy and Cookie Use Policy found on the Hyperlinks.
 	<br>
