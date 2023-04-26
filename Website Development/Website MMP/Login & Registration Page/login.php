@@ -3,7 +3,7 @@
 <head>
 <style>
 body {
-    background: #3e4144;
+    background: #d3d3d3;
 }
 .form {
     margin: 50px auto;
