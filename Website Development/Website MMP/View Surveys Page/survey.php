@@ -1,13 +1,93 @@
 <!DOCTYPE html>
 <html lang="eng">
 <head>
-  <script src = "jquery-3.6.3.min.js"></script>
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    width: 70%;
+}
+
+button {
+    background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+}
+select{
+        background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+}
+
+button:hover, select:hover, .delete-btn:hover {
+    background-color: lightgray;
+            color: black;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    color: black;
+}
+
+li .delete-btn {
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #04AA6D;
+}
+</style>
+  <script src="jquery-3.6.3.min.js"></script>
   <title>Survey Questions</title>
   <link rel="stylesheet" href="td_style.css">
 </head> 
 <body>
     <?php
         require('db.php');
+        // check if user is logged in
+        session_start();
+        if (!isset($_SESSION['Username']) || empty($_SESSION['Username'])) {
+            header("Location: login.php");
+            exit();
+        }
         // If the survey title is requested it will call this code.
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
@@ -15,39 +95,41 @@
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
-            $sql = $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID) 
-                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '2023502400')";
-                // This puts the SQL syntax into the database.
-                $result = mysqli_query($con, $sql); 
+            $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID) 
+                    VALUES (NULL, '$surveyname', NOW(), 'Y', NULL, '2023502400')";
+            // This puts the SQL syntax into the database.
+            $result = mysqli_query($con, $sql); 
+        }
+        // If arraytext is requested it will call this code.
+        if(isset($_REQUEST['arraytext'])){
+            // This selects the surveyID from the database.
+            $surveyID = 'SELECT SurveyID FROM SurveyDetails LIMIT 1';
+            $result = mysqli_query($con, $surveyID);
+            $row = mysqli_fetch_assoc($result);
+            $surveyID = $row['SurveyID'];
+            //This get's all the questions and separates them into an array.
+            $questions = stripslashes($_REQUEST['arraytext']);
+            $questionarray = explode('|||', $questions);
+            $questionarray = array_filter($questionarray);
+            //This goes through the array and adds the data to the database in order.
+            $i = 0;
+            $questionnumber = 1;
+            $arrayLength = count($questionarray);
+            while($i < $arrayLength)
+            {
+                $question = mysqli_real_escape_string($con, $questionarray[$i]);
+                $questiontype = mysqli_real_escape_string($con, $questionarray[$i+1]);
+                $sql = "INSERT INTO `SurveyQuestions` (QuestionNumber, QuestionName, QuestionType, QuestionStatus, SurveyDetails_SurveyID) 
+                        VALUES ('$questionnumber', '$question', '$questiontype', 'M', '$surveyID')";
+                $questionnumber++;
+                $i = $i + 2;
+                $result = mysqli_query($con, $sql);
             }
-            // If arraytext is requested it will call this code.
-            if(isset($_REQUEST['arraytext'])){
-                // This selects the surveyID from the database.
-                $surveyID = 'SELECT SurveyID FROM SurveyDetails';
-                $result = mysqli_query($con, $surveyID);
-                while($row = mysqli_fetch_assoc($result)){
-                    $surveyID = $row['SurveyID'];
-                }
-                //This get's all the questions and seperates them into an array.
-                $questions = stripslashes($_REQUEST['arraytext']);
-                $questionarray = explode('|||', $questions);
-                $questionarray = array_filter($questionarray);
-                //This goes through the array and adds the data to the database in order.
-                $i = 0;
-                $y = 1;
-                $questionnumber = 1;
-                $arrayLength = count($questionarray);
-                while($i < $arrayLength)
-                {
-                    $sql = "INSERT INTO `SurveyQuestions` (QuestionNumber, QuestionName, QuestionType, QuestionStatus, SurveyDetails_SurveyID) 
-                    VALUES ('$questionnumber', '$questionarray[$i]', '$questionarray[$y]', 'M', '$surveyID')";
-                    $questionnumber++;
-                    $y = $y + 2;
-                    $i = $i + 2;
-                    $result = mysqli_query($con, $sql);
-                }
-            }          
+        }          
     ?>
+	
+</body>
+</html>
     <h1>Survey Questions</h1>
     <form>
         <input type = 'text' placeholder = 'Survey Title' id = 'surveytitle' name = 'surveytitle' form = 'submitForm'>
@@ -67,6 +149,9 @@
     <form  action = '' method = 'post' id = 'submitForm' name = 'submitForm'>
         <input type = 'text' id = 'arraytext' name = 'arraytext' value = '' hidden>
         <button type = 'submit' id = 'submitbtn' name = 'submitbtn'>Submit</button>
+		<a href="dashboard.php" target="_blank">
+		<button type="button">Dashboard page</button>
+		</a>
     </form>
 <script>
   // Select the form, input, and list elements from the HTML
@@ -151,7 +236,62 @@ itemsList.addEventListener('click', deleteItem);
 // in the list
 displayItems();
 
+// Listen to the form submission
+form.addEventListener('submit', event => {
+  event.preventDefault(); // Prevent the default form submission
 
+  // Get the input value and clear the input field
+  const newItem = input.value.trim();
+  input.value = '';
+
+  // Add the item to the items array and display the updated list
+  if (newItem !== '') {
+    items.push(newItem);
+    displayItems();
+  }
+});
+
+// Listen to the delete button clicks and remove the item from the list
+itemsList.addEventListener('click', event => {
+  if (event.target.classList.contains('delete-btn')) {
+    const index = event.target.dataset.index;
+    items.splice(index, 1);
+    displayItems();
+  }
+});
+
+// Update the arraystring value when the submit button is clicked
+submitButton.addEventListener('click', event => {
+  event.preventDefault(); // Prevent the default form submission
+  arraystring = items.join('|||');
+  arraystringvalue.value = arraystring;
+  submitForm.submit();
+});
+
+// Display the items in the list
+function displayItems() {
+  // Clear the existing list
+  itemsList.innerHTML = '';
+
+  // Create a new list item for each item in the items array
+  items.forEach((item, index) => {
+    const questionValue = selectQuestion.options[selectQuestion.selectedIndex].value;
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    span.id = questionValue;
+    span.name = item;
+    span.textContent = item;
+    li.appendChild(span);
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.dataset.index = index;
+    deleteBtn.textContent = 'Delete';
+    li.appendChild(deleteBtn);
+    itemsList.appendChild(li);
+  });
+}
 </script>
 </body>
 </html>
+  
+

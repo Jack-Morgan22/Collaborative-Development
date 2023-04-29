@@ -1,6 +1,9 @@
 <?php
-//This where the dashboard will include auth_session.php file on all user panel pages.
-include("auth_session.php");
+session_start();
+if(!isset($_SESSION["Username"])){
+    header("Location: login.php");//If user not logged in redirect to the login page
+    exit(); 
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,7 +69,6 @@ h3 {
 <body>
     <div class="form">
         <h1 class="login-title">Welcome, <?php echo $_SESSION['Username']; ?>!</h1>
-        <p>Here you can view your surveys:</p>	
 <?php
     // This is where the connection happens through host name, database username, password, and database name.
     $con = mysqli_connect("localhost","2112834","85rj5j","db2112834");
@@ -75,35 +77,38 @@ h3 {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
 	
-	// Retrieve the surveys for the logged in user
-	if(isset($_SESSION['SurveyID'])) {
-		$SurveyID = $_SESSION['SurveyID'];
-		$sql = "SELECT * FROM SurveyDetails WHERE SurveyID = '$SurveyID'";
-		$result = $con->query($sql);
-
-		// Display the surveys in a table
-		if ($result->num_rows > 0) {
-			echo "<table>";
-			echo "<tr><th>SurveyName</th><th>Users_ID</th><th>CreationDate</th></tr>";
-			while ($row = $result->fetch_assoc()) {
-				echo "<tr>";
-				echo "<td>" . $row['SurveyName'] . "</td>";
-				echo "<td>" . $row['Users_ID'] . "</td>";
-				echo "<td>" . $row['CreationDate'] . "</td>";
-				echo "</tr>";
-				}
-			echo "</table>";
-			} else {
-			echo "No surveys found.";
-			}
-		}
-
-	// Close the MySQL connection
-	$con->close();
+ // get the user's ID from the session
+    $UserID = $_SESSION['Username'];
+    // establish MySQLi connection
+    // This is where the connection happens through host name, database username, password, and database name.
+    $con = mysqli_connect("localhost","2112834","85rj5j","db2112834");
+    // The database will check connection between the site and database.
+    if (mysqli_connect_errno()){
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+    // query the database for the user's surveys
+    $sql = "SELECT SurveyID, SurveyName FROM SurveyDetails WHERE Users_UserID = '$UserID'";
+    $result = mysqli_query($con, $sql);
+    // display the surveys in a list
+    if (mysqli_num_rows($result) > 0) {
+        echo "<h2>My Surveys</h2>";
+        echo "<ul>";
+        while($row = mysqli_fetch_assoc($result)) {
+            $surveyID = $row['SurveyID'];
+            $surveyName = $row['SurveyName'];
+            // display the survey name with a link to the survey
+            echo "<li><a href='survey.php?id=$surveyID'>$surveyName</a></li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "<p>You haven't created any surveys yet.</p>";
+    }
+    // close the MySQLi connection
+    mysqli_close($con);
 ?>
 
         <p><a href="logout.php">Logout</a></p>
-		<p><a href="profile.php">Profile</a></p>
+		<p><a href="survey.php">Create survey</a></p>	
     </div>
 </body>
 </html>
