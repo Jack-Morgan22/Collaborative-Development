@@ -1,2 +1,2 @@
 https://mi-linux.wlv.ac.uk/~2113455/dashboard.php
-https://mi-linux.wlv.ac.uk/~2113455/profile.php
+https://mi-linux.wlv.ac.uk/~2113455/Profile.php
