@@ -8,6 +8,10 @@
             font-family: Arial, sans-serif;
         }
 
+        h1, h3, p {
+            font-family: Arial, sans-serif;
+        }
+
         header {
             background-color: lightgray;
             width: 100%;
@@ -153,17 +157,17 @@
     <nav>
         <ul>
             <li>
-                <button class="navbutton" id="home">Home</button>
-                <button class="navbutton" id="vs">View Surveys</button>
-                <button class="navbutton" id="cs">Create Surveys</button>
-                <button class="navbutton" id="contact">Contact Us</button>
+                <button class="navbutton" id="home" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html';">Home</button>
+                <button class="navbutton" id="vs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/viewsurveys.html';">View Surveys</button>
+                <button class="navbutton" id="cs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/createsurveys.php';">Create Surveys</button>
+                <button class="navbutton" id="contact" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/contactus.html';">Contact Us</button>
                 <button class="navbutton" id="va">My Account</button>
                 <div class="dropdown">
                     <button class="dropbtn" id="legal">Legal</button>
                     <div class="dropdown-content">
-                        <button class="navbutton" id="tos">Terms of Service</button>
-                        <button class="navbutton" id="priv">Privacy Policy</button>
-                        <button class="navbutton" id="cook">Cookie Use Policy</button>
+                        <button class="navbutton" id="tos" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/termsofservice.html';">Terms of Service</button>
+                        <button class="navbutton" id="priv" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/privacypolicy.html';">Privacy Policy</button>
+                        <button class="navbutton" id="cook" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/cookieusepolicy.html';">Cookie Use Policy</button>
                     </div>
                 </div>
                 <button class="navbutton" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/login.php';">Login</button>
@@ -172,33 +176,14 @@
         </ul>
     </nav>
 </header>
-
 <div class="container">
-    <div class="section" id="homeframe">
-        <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/hometext.html" class="frames"></iframe>
-    </div>
-    <div class="section" id="vsframe">
-        <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/surveyviewer.html" class="frames"></iframe>
-    </div>
-    <div class="section" id="csframe">
-        <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/survey.php" class="frames"></iframe>
-    </div>
-    <div class="section" id="contactframe">
-        <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/Contact.html" class="frames"></iframe>
-    </div>
-    <div class="section" id="vaframe">
-        <h1>Example Frame</h1>
-        <p>Viewing Account will go here</p>
-    </div>
-    <div class="section" id="tosframe">
-        <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/termsofservice.html" class="frames"></iframe>
-    </div>
-    <div class="section" id="privframe">
-        <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/privacypolicy.html" class="frames"></iframe>
-    </div>
-    <div class="section" id="cookframe">
-        <iframe src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/cookieusepolicy.html" class="frames"></iframe>
-    </div>
+    <h1>Survey4All</h1>
+    <p>
+        Welcome to Survey4All, an online survey tool created for individuals looking to acquire real data from real people.
+        With the help of a wide range of tools on our forward thinking platform, you can easily develop, distribute, and analyse your surveys.
+        You can tailor surveys to your particular needs using our user-friendly interface, from commercial and market research to educational and academic surveys.
+        You can make informed decisions thanks to the useful insights our specialised analytics tools give you.
+    </p>
 </div>
 <script>
     window.addEventListener("load", function(){
@@ -210,59 +195,6 @@
     });
     document.querySelector("#close").addEventListener("click", function(){
         document.querySelector(".popup").style.display = "none";
-    });
-    function showSection(section) {
-        home.style.display = "none";
-        view.style.display = "none";
-        create.style.display = "none";
-        contact.style.display = "none";
-        account.style.display = "none";
-        tos.style.display = "none";
-        privacy.style.display = "none";
-        cookie.style.display = "none";
-        section.style.display = "block";
-    }
-
-    const B1 = document.getElementById("home");
-    const B2 = document.getElementById("vs");
-    const B3 = document.getElementById("cs");
-    const B4 = document.getElementById("contact");
-    const B5 = document.getElementById("va");
-    const B6A = document.getElementById("tos");
-    const B6B = document.getElementById("priv");
-    const B6C = document.getElementById("cook");
-    const home = document.getElementById("homeframe");
-    const view = document.getElementById("vsframe");
-    const create = document.getElementById("csframe");
-    const contact = document.getElementById("contactframe");
-    const account = document.getElementById("vaframe");
-    const tos = document.getElementById("tosframe");
-    const privacy = document.getElementById("privframe");
-    const cookie = document.getElementById("cookframe");
-
-    B1.addEventListener("click", () => {
-        showSection(home);
-    });
-    B2.addEventListener("click", () => {
-        showSection(view);
-    });
-    B3.addEventListener("click", () => {
-        showSection(create);
-    });
-    B4.addEventListener("click", () => {
-        showSection(contact);
-    });
-    B5.addEventListener("click", () => {
-        showSection(account);
-    });
-    B6A.addEventListener("click", () => {
-        showSection(tos);
-    });
-    B6B.addEventListener("click", () => {
-        showSection(privacy);
-    });
-    B6C.addEventListener("click", () => {
-        showSection(cookie);
     });
 </script>
 </body>
