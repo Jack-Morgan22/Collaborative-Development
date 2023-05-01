@@ -86,6 +86,7 @@ li .delete-btn {
         session_start();
         if (!isset($_SESSION['Username']) || empty($_SESSION['Username'])) {
             header("Location: login.php");
+            $userID = $_SESSION['Username'];
             exit();
         }
         // If the survey title is requested it will call this code.
@@ -96,7 +97,7 @@ li .delete-btn {
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
             $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID) 
-                    VALUES (NULL, '$surveyname', NOW(), 'Y', NULL, '2023502400')";
+                    VALUES (NULL, '$surveyname', NOW(), 'Y', NULL, '$userID')";
             // This puts the SQL syntax into the database.
             $result = mysqli_query($con, $sql); 
         }
