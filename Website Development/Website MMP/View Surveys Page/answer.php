@@ -7,7 +7,7 @@
     <body>
         <form id="phpForm" method="post" onsubmit="sortingAnswers()">
             <div id = "Questions">
-                <ul></ul>
+                <ul id = "ulelement"></ul>
             </div>
             <input type ="text" name="number" id="number" hidden>
             <input type ="text" name="surveyname" id="surveyname" hidden>
@@ -49,22 +49,22 @@
                     var stringAppend =`<li id="${questionType}" name="${questionName}">"${questionName}"</li>`;
                     list.append(`${stringAppend}`);
                     if(String(questionType) == "TX"){
-                        list.append(`<li><input type='text' form = "phpForm" class="answers" name="answers[]" multiple></li>`);
+                        list.append(`<li><input type='text' form = "phpForm"  class="answers" name="answers[]" value=""></li>`);
                     }
                     else if(String(questionType) == "NM"){
-                        list.append(`<li><input type='number' form = "phpForm" class="answers" name="answers[]" multiple></li>`);
+                        list.append(`<li><input type='number' form = "phpForm"  class="answers" name="answers[]" value=""></li>`);
                     }
                     else if(String(questionType) == "CL"){
-                        list.append(`<li><input type='color' form = "phpForm" class="answers" name="answers[]" multiple></li>`);
+                        list.append(`<li><input type='color' form = "phpForm"  class="answers" name="answers[]" value=""></li>`);
                     }
                     else if(String(questionType) == "EM"){
-                        list.append(`<li><input type='email' form = "phpForm" class="answers" name="answers[]" multiple></li>`);
+                        list.append(`<li><input type='email' form = "phpForm"  class="answers" name="answers[]" value=""></li>`);
                     }
                     else if(String(questionType) == "DT"){
-                        list.append(`<li><input type='date' form = "phpForm" class="answers" name="answers[]" multiple></li>`);
+                        list.append(`<li><input type='date' form = "phpForm"  class="answers" name="answers[]" value=""></li>`);
                     }
                     else if(String(questionType) == "FL"){
-                        list.append(`<li><input type='file' form = "phpForm" class="answers" name="answers[]" multiple></li>`);
+                        list.append(`<li><input type='file' form = "phpForm"  class="answers" name="answers[]" value=""></li>`);
                     }
                     i++;
                 }
@@ -76,14 +76,11 @@
         });
         function sortingAnswers(){
             var answers = [];
-            var answerboxes = document.getElementsByName('answers[]');
-            var i = 0;
-            if(i < checkboxes.length){
-                items.push(answerboxes[i].value);
-                i++;
+            var answerboxes = document.getElementsByClassName('answers');
+            for (let item of answerboxes){
+                answers.push(item.value);
             }
-            document.getElementById("Answers").value = JSON.stringify(items);
-            console.log(items);
+            document.getElementById("Answers").value = JSON.stringify(answers);
         }
     </script>
     <?php
@@ -101,6 +98,7 @@
                     $detailsString = $_POST['details'];
                     $detailsArray = [];
                     $answerArray = json_decode($_POST['Answers']);
+                    echo'<pre>'; print_r($answerArray); echo '</pre>';
                     $answerString = $_POST['Answers'];
                     $detailsArray = explode('|||', $detailsString);
                     $detailsArray = array_filter($detailsArray);
