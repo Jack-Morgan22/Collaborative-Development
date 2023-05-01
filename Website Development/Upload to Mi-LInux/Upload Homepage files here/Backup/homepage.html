@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey4All</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h3, p {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: lightgray;
+            width: 100%;
+            height: 100px;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .popup {
+            background-color: lightgray;
+            width: 450px;
+            padding: 30px 40px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            border-radius: 8px;
+            font-family: "Poppins",sans-serif;
+            display: none;
+            text-align: center;
+        }
+
+        .popup button {
+            display: block;
+            margin:  0 0 20px auto;
+            background-color: transparent;
+            font-size: 30px;
+            color: black;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .popup p {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: justify;
+            margin: 20px 0;
+            line-height: 25px;
+        }
+
+        .logo {
+            float: left;
+            height: 50%;
+            width: 20%;
+            margin: 20px 5px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+        }
+
+        ul li {
+            margin: 20px 20px;
+        }
+
+        ul li p {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .navbutton, .dropbtn {
+            background-color: lightgray;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: lightgray;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .navbutton:hover, .dropbtn:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .container {
+            width: 100%;
+            height: 500px;
+        }
+
+        .frames {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+    </style>
+</head>
+<body onload="showSection(home)">
+<div class="popup">
+    <button id="close">&times;</button>
+    <h2>Legal Notice</h2>
+    <p>
+        By using the website you are agreeing to the Terms of Service, Privacy Policy, and Cookie Use Policy.
+        <br><br>
+        They can be found here:
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_termsofservice.html">Terms of Service</a>
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_privacypolicy.html">Privacy Policy</a>
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_cookieusepolicy.html">Cookie Use Policy</a>
+    </p>
+</div>
+<header>
+    <img src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/Survey4AllLogo.png" alt="Logo" class="logo">
+    <nav>
+        <ul>
+            <li>
+                <button class="navbutton" id="home" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html';">Home</button>
+                <button class="navbutton" id="vs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/viewsurveys.html';">View Surveys</button>
+                <button class="navbutton" id="cs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/createsurveys.php';">Create Surveys</button>
+                <button class="navbutton" id="contact" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/contactus.html';">Contact Us</button>
+                <button class="navbutton" id="va">My Account</button>
+                <div class="dropdown">
+                    <button class="dropbtn" id="legal">Legal</button>
+                    <div class="dropdown-content">
+                        <button class="navbutton" id="tos" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/termsofservice.html';">Terms of Service</button>
+                        <button class="navbutton" id="priv" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/privacypolicy.html';">Privacy Policy</button>
+                        <button class="navbutton" id="cook" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/cookieusepolicy.html';">Cookie Use Policy</button>
+                    </div>
+                </div>
+                <button class="navbutton" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/login.php';">Login</button>
+                <button class="navbutton" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/registration.php';">Register</button>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <h1>Survey4All</h1>
+    <p>
+        Welcome to Survey4All, an online survey tool created for individuals looking to acquire real data from real people.
+        With the help of a wide range of tools on our forward thinking platform, you can easily develop, distribute, and analyse your surveys.
+        You can tailor surveys to your particular needs using our user-friendly interface, from commercial and market research to educational and academic surveys.
+        You can make informed decisions thanks to the useful insights our specialised analytics tools give you.
+    </p>
+</div>
+<script>
+    window.addEventListener("load", function(){
+        setTimeout(
+            function open(event){
+                document.querySelector(".popup").style.display = "block";
+            },
+        )
+    });
+    document.querySelector("#close").addEventListener("click", function(){
+        document.querySelector(".popup").style.display = "none";
+    });
+</script>
+</body>
+</html>
