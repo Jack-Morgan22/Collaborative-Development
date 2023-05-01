@@ -86,13 +86,13 @@ li .delete-btn {
         session_start();
         if (!isset($_SESSION['Username']) || empty($_SESSION['Username'])) {
             header("Location: login.php");
-            $userID = $_SESSION['Username'];
             exit();
         }
         // If the survey title is requested it will call this code.
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
             $questionarray = [];
+            $userID = $_SESSION['Username'];
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
