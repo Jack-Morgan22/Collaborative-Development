@@ -98,7 +98,6 @@
                     $detailsString = $_POST['details'];
                     $detailsArray = [];
                     $answerArray = json_decode($_POST['Answers']);
-                    echo'<pre>'; print_r($answerArray); echo '</pre>';
                     $answerString = $_POST['Answers'];
                     $detailsArray = explode('|||', $detailsString);
                     $detailsArray = array_filter($detailsArray);
