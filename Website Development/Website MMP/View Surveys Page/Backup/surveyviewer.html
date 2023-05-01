@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <script src="jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" href="td_style.css">
+</head>
+<body>
+    <form id="surveyform">
+        <div id="list">
+            <ul></ul>
+        </div>
+    </form>
+</body>
+<script type="text/javascript">
+    fetch('https://mi-linux.wlv.ac.uk/~2119668/my-api3.php')
+    .then(response => response.json())
+    .then(response => {
+        const questionList = document.getElementById("list");
+        let i = 0;
+        var list = $("#list").find('ul');
+        while(i < response.length){
+            var stringAppend =`<li><a id="${response[i].SurveyName}" name="${response[i].SurveyName}" href="https://mi-linux.wlv.ac.uk/~2119668/answer.php?id=${response[i].SurveyID}">"${response[i].SurveyName}"</a></li>`;
+            list.append(`${stringAppend}`);
+            console.log(response[i].SurveyName);
+            i++;
+        }
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+</script>
