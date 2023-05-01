@@ -3,7 +3,7 @@
 <head>
 <style>
 body {
-    background: #3e4144;
+    background: #d3d3d3;
 }
 .form {
     margin: 50px auto;
@@ -32,7 +32,7 @@ h1.login-title {
 }
 .login-button {
     color: #fff;
-    background: #55a1ff;
+    background: #2E8B57;
     border: 0;
     outline: 0;
     width: 100%;
@@ -55,6 +55,11 @@ h3 {
     text-align: center;
 }
 </style>
+    <meta charset="utf-8"/>
+    <title>Registration</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
     <meta charset="utf-8"/>
     <title>Registration</title>
     <link rel="stylesheet" href="style.css"/>
@@ -92,16 +97,28 @@ h3 {
         }
     } else {
 ?>
-    <form class="form" action="" method="post">
-        <h1 class="login-title">Registration</h1>
-        <input type="text" class="login-input" name="Username" placeholder="Username" required />
-		<input type="text" class="login-input" name="Name" placeholder="Name">
-        <input type="text" class="login-input" name="Email" placeholder="Email Adress">
-        <input type="password" class="login-input" name="Password" placeholder="Password">
-		<input type="password" class="login-input" name="Confirm password" placeholder="Confirm password"> 
-        <input type="submit" name="submit" value="Register" class="login-button">
-        <p class="link"><a href="login.php">Click to Login</a></p>
-    </form>
+  <form class="form" action="" method="post">
+  <h1 class="login-title">Registration</h1>
+  <input type="text" class="login-input" name="Username" placeholder="Username" required />
+  <input type="text" class="login-input" name="Name" placeholder="Name" required />
+  <input type="text" class="login-input" name="Email" placeholder="Email Adress" required />
+  <input type="password" class="login-input" name="Password" placeholder="Password" required />
+  <input type="password" class="login-input" name="Confirm password" placeholder="Confirm password">
+  <input type="submit" name="submit" value="Register" class="login-button">
+  <p class="link"><a href="login.php">Click to Login</a></p>
+   <p class="link"><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Home</a></p>
+  <label>
+    <input type="checkbox" name="agree" value="yes" required>I read, understood and agree with the Terms of Service, Privacy Policy and Cookie Use Policy found on the Hyperlinks.
+	<br>
+	<br>
+    <a href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_termsofservice.html">Terms of service</a> 
+    <a href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_privacypolicy.html">Privacy Policy</a> 
+    <a href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_cookieusepolicy.html">Cookie use Policy</a>
+  </label>
+</form>
+	
+	
+	
 <?php
 // The section above is where it shows the output of Registration form to the users where they can input their values.
     }

@@ -1,10 +1,9 @@
 # Collaborative-Development
-Jack's groups workspace for the project
+GitHub Repository for the Survey4All Group Project created by: Jack Morgan, Kieron Ransley, John Hewitt, Sapphire Dixon, Josh Boratynski, Kamil Grudzinski and Callum Moore
 
-Website Home Page: https://mi-linux.wlv.ac.uk/~2119668/homepage.html
+Sprint 1: https://mi-linux.wlv.ac.uk/~2119668/homepage.html
 
-Survey Maker Page: https://mi-linux.wlv.ac.uk/~2119668/creator.html
+Sprint 2: https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html
 
-Login/Registration Page: https://mi-linux.wlv.ac.uk/~2119668/Log%20In.html
+<img src= "https://github.com/Jack-Morgan22/Collaborative-Development/blob/main/Website%20Development/Image%20Creation/Logo/Version%204/Survey4All%20Logo.png">
 
-Contact Page: https://mi-linux.wlv.ac.uk/~2119668/contact.html

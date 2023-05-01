@@ -3,7 +3,7 @@
 <head>
 <style>
 body {
-    background: #3e4144;
+    background: #d3d3d3;
 }
 .form {
     margin: 50px auto;
@@ -32,7 +32,7 @@ h1.login-title {
 }
 .login-button {
     color: #fff;
-    background: #55a1ff;
+    background: #2E8B57 ;
     border: 0;
     outline: 0;
     width: 100%;
@@ -89,9 +89,10 @@ h3 {
     <form class="form" method="post" name="login">
         <h1 class="login-title">Login</h1>
         <input type="text" class="login-input" name="Username" placeholder="Username" autofocus="true"/>
-        <input type="password" class="login-input" name="Password" placeholder="Password"/>
+        <input type="Password" class="login-input" name="Password" placeholder="Password"/>
         <input type="submit" value="Login" name="submit" class="login-button"/>
         <p class="link"><a href="registration.php">New Registration</a></p>
+		<p class="link"><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Home</a></p>
   </form>
 <?php
     }
