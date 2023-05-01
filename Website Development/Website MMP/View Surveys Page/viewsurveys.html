@@ -8,10 +8,6 @@
             font-family: Arial, sans-serif;
         }
 
-        h1, h3, p {
-            font-family: Arial, sans-serif;
-        }
-
         header {
             background-color: lightgray;
             width: 100%;
@@ -61,7 +57,7 @@
             margin: 20px 5px;
         }
 
-        ul {
+        nav ul {
             margin: 0;
             padding: 0;
             list-style: none;
@@ -69,11 +65,11 @@
             flex-direction: row;
         }
 
-        ul li {
+        nav ul li {
             margin: 20px 20px;
         }
 
-        ul li p {
+        nav ul li p {
             color: #fff;
             text-decoration: none;
             font-weight: bold;
@@ -135,11 +131,13 @@
             border: none;
         }
     </style>
+    <script src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/td_style.css">
 </head>
 <body onload="showSection(home)">
 <div class="popup">
     <button id="close">&times;</button>
-    <h2>Legal Notice</h2>
+    <h2>Alert</h2>
     <p>
         By using the website you are agreeing to the Terms of Service, Privacy Policy, and Cookie Use Policy.
         <br><br>
@@ -158,7 +156,7 @@
         <ul>
             <li>
                 <button class="navbutton" id="home" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html';">Home</button>
-                <button class="navbutton" id="vs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~22201053/CollabDev/viewsurveys.html';">View Surveys</button>
+                <button class="navbutton" id="vs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/viewsurveys.html';">View Surveys</button>
                 <button class="navbutton" id="cs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/createsurveys.php';">Create Surveys</button>
                 <button class="navbutton" id="contact" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2112834/CollabDev/contactus.html';">Contact Us</button>
                 <button class="navbutton" id="va">My Account</button>
@@ -177,25 +175,29 @@
     </nav>
 </header>
 <div class="container">
-    <h1>Survey4All</h1>
-    <p>
-        Welcome to Survey4All, an online survey tool created for individuals looking to acquire real data from real people.
-        With the help of a wide range of tools on our forward thinking platform, you can easily develop, distribute, and analyse your surveys.
-        You can tailor surveys to your particular needs using our user-friendly interface, from commercial and market research to educational and academic surveys.
-        You can make informed decisions thanks to the useful insights our specialised analytics tools give you.
-    </p>
+    <form id="surveyform">
+        <div id="list">
+            <ul></ul>
+        </div>
+    </form>
 </div>
-<script>
-    window.addEventListener("load", function(){
-        setTimeout(
-            function open(event){
-                document.querySelector(".popup").style.display = "block";
-            },
-        )
-    });
-    document.querySelector("#close").addEventListener("click", function(){
-        document.querySelector(".popup").style.display = "none";
-    });
+<script type="text/javascript">
+    fetch('https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/my-api3.php')
+        .then(response => response.json())
+        .then(response => {
+            const questionList = document.getElementById("list");
+            let i = 0;
+            var list = $("#list").find('ul');
+            while(i < response.length){
+                var stringAppend =`<li><a id="${response[i].SurveyName}" name="${response[i].SurveyName}" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/answer.php?id=${response[i].SurveyID}">"${response[i].SurveyName}"</a></li>`;
+                list.append(`${stringAppend}`);
+                console.log(response[i].SurveyName);
+                i++;
+            }
+        })
+        .catch(err =>{
+            console.log(err);
+        })
 </script>
 </body>
 </html>
