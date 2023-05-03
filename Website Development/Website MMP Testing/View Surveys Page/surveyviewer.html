@@ -4,9 +4,10 @@
     <link rel="stylesheet" href="td_style.css">
 </head>
 <body>
+    <input type="text" id="searchBar" onkeyup="searchList()" placeholder="Search for surveys...">
     <form id="surveyform">
         <div id="list">
-            <ul></ul>
+            <ul id="unorderedlist"></ul>
         </div>
     </form>
 </body>
@@ -20,11 +21,27 @@
         while(i < response.length){
             var stringAppend =`<li><a id="${response[i].SurveyName}" name="${response[i].SurveyName}" href="https://mi-linux.wlv.ac.uk/~2119668/answer.php?id=${response[i].SurveyID}">"${response[i].SurveyName}"</a></li>`;
             list.append(`${stringAppend}`);
-            console.log(response[i].SurveyName);
             i++;
         }
     })
     .catch(err =>{
         console.log(err);
     })
+
+    function searchList(){
+        var input, filter, li, a, i, textValue;
+        input = document.getElementById("searchBar");
+        filter = input.value.toUpperCase();
+        li = document.getElementById("unorderedlist").querySelectorAll("li");
+
+        for(i = 0; i < li.length; i++){
+            a = li[i].getElementsByTagName("a")[0];
+            textValue = a.textContent || a.innerText;
+            if(textValue.toUpperCase().indexOf(filter) > -1){
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
 </script>
