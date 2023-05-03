@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="container">
+	<div id="text"></div>
+</div>
+
+<script>
+// List of questions
+var _CONTENT = [ "How old are you?", "What do you study?", "On a scale from 1 to 10...", "What's your favourite food?", "Have you created a survey?", "Do you like...?", "Choose between..."];
+// Current question being processed
+var _PART = 0;
+// Character number of the current question being processed 
+var _PART_INDEX = 0;
+// Holds the handle returned from setInterval
+var _INTERVAL_VAL;
+// Element that holds the questions
+var _ELEMENT = document.querySelector("#text");
+// Typing effect
+function Type() { 
+	var text =  _CONTENT[_PART].substring(0, _PART_INDEX + 1);
+	_ELEMENT.innerHTML = text;
+	_PART_INDEX++;
+
+	// starts deleting question after it has been fully written.
+	if(text === _CONTENT[_PART]) {
+		clearInterval(_INTERVAL_VAL);
+		setTimeout(function() {
+			_INTERVAL_VAL = setInterval(Delete, 50);
+		}, 1000);
+	}
+}
+
+// deleting effect
+function Delete() {
+	var text =  _CONTENT[_PART].substring(0, _PART_INDEX - 1);
+	_ELEMENT.innerHTML = text;
+	_PART_INDEX--;
+
+	// displays next question if previous has been deleted
+	if(text === '') {
+		clearInterval(_INTERVAL_VAL);
+
+		// displays first question if cycled through all questions
+		if(_PART == (_CONTENT.length - 1))
+			_PART = 0;
+		else
+			_PART++;
+		_PART_INDEX = 0;
+
+		// delays displaying next question
+		setTimeout(function() {
+			_INTERVAL_VAL = setInterval(Type, 100);
+		}, 200);
+	}
+}
+
+// starts typing effect on load
+_INTERVAL_VAL = setInterval(Type, 100);
+</script>
+</body>
+</html>

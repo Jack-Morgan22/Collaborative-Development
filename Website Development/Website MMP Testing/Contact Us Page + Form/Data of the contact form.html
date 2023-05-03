@@ -1,0 +1,6 @@
+let sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1RXKJhsGUeyjrdS8tsv0Usvk_9uxq40d05p1kD-71UPA/edit#gid=0")
+function doPost(e){
+  MailApp.sendEmail("jackmorgan251102@yahoo.com",`${e.parameters.name} from new contact form!`,`${e.parameters.message}\n${e.parameters.email}`)
+  return ContentService.createTextOutput("Message has been Sent!")
+}
+
