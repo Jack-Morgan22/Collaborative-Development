@@ -149,6 +149,15 @@
             border: none;
         }
     </style>
+    
+    <?php
+    session_start();
+    if(!isset($_SESSION["Username"])){
+    header("Location: login.php");//If user not logged in redirect to the login page
+    exit();
+    }
+    ?>
+    
     <script src = "https://mi-linux.wlv.ac.uk/~2112834/CollabDev/jquery-3.6.3.min.js"></script>
     <title>Survey Questions</title>
     <link rel="stylesheet" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/td_style.css">
