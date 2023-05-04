@@ -88,7 +88,6 @@ h3 {
         $rows = mysqli_num_rows($result);
         if ($rows == 1) {
             $_SESSION['Username'] = $Username;
-	    $_SESSION['loggedin'] == true;
             // If login is correct it will redirect to user dashboard page.
             header("Location:  https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html");
         } else {
