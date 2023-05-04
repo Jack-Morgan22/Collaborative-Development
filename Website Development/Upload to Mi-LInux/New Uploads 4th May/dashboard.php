@@ -109,8 +109,8 @@ h3 {
 
         <p><a href="logout.php">Logout</a></p>
 		<p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/createsurveys.php">Create survey</a></p>
-		<p><a href="Profile.php">My Profile</a></p>
-		<p><a href="dashboard.php">Go to Dashboard</a></p>
+		<p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/myaccount.php">My Profile</a></p>
+		<p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Homepage</a></p>
     </div>
 </body>
 </html>
