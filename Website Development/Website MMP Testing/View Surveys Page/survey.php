@@ -92,7 +92,13 @@ li .delete-btn {
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
             $questionarray = [];
-            $userID = $_SESSION['Username'];
+            $username = $_SESSION('Username');
+
+            $sql1 = 'SELECT UserID FROM `Users` WHERE Username = '$username'';
+        
+            $result1 = mysqli_query($conn, $sql);
+        
+            $userID = $result1;
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
