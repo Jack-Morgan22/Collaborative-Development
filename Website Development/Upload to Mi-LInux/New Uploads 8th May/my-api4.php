@@ -14,7 +14,7 @@
         $userID = $rows['UserID'];
     }
 
-    $sql = 'SELECT * FROM `SurveyDetails` WHERE User_UserID = '$userID'';
+    $sql = "SELECT * FROM `SurveyDetails` WHERE User_UserID = '$userID'";
 
     $result = mysqli_query($conn, $sql);
 
