@@ -212,7 +212,7 @@ if (!isset($_SESSION['Username'])) {
 
             $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
         
-            $result1 = mysqli_query($conn, $sql);
+            $result1 = mysqli_query($con, $sql1);
         
             $userID = $result1;
             // This requests the title from the HTML and takes away the slashes.
