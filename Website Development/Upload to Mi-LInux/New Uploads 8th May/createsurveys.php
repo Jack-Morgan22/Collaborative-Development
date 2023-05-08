@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['Username'])) {
     // User is not authenticated, redirect to login page
     header('Location: https://mi-linux.wlv.ac.uk/~2201053/Survey4All/login.php');
     exit;
@@ -208,11 +208,18 @@ if (!isset($_SESSION['user_id'])) {
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
             $questionarray = [];
+            $username = stripslashes($_SESSION('Username'));
+
+            $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
+        
+            $result1 = mysqli_query($conn, $sql);
+        
+            $userID = $result1;
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
             $sql = $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID)
-                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '2023502400')";
+                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '$userID')";
                 // This puts the SQL syntax into the database.
                 $result = mysqli_query($con, $sql);
             }
