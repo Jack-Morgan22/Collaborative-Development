@@ -75,7 +75,19 @@ if(!isset($_SESSION["Username"])){
             </form>
         </body>
         <script type="text/javascript">
-            fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api.4php')
+          var UserID = <?php require('db.php');
+          $username = stripslashes($_SESSION['Username']);
+
+          $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
+
+          $result1 = mysqli_query($con, $sql1);
+
+          while($rows = mysqli_fetch_assoc($result1)){
+              $userID = $rows['UserID'];
+          }
+          echo($userID);
+          ?>
+            fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api4.php?userid=' + UserID)
             .then(response => response.json())
             .then(response => {
                 const questionList = document.getElementById("list");

@@ -4,15 +4,8 @@
     if(!$conn){
         echo "Connection error," . mysqli_connect_error();
     }
-    $username = stripslashes($_SESSION['Username']);
 
-    $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
-
-    $result1 = mysqli_query($con, $sql1);
-    
-    while($rows = mysqli_fetch_assoc($result1)){
-        $userID = $rows['UserID'];
-    }
+    $userID = htmlspecialchars($_GET['userid']);
 
     $sql = "SELECT * FROM `SurveyDetails` WHERE User_UserID = '$userID'";
 
