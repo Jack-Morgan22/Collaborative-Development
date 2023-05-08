@@ -75,7 +75,7 @@ if(!isset($_SESSION["Username"])){
             </form>
         </body>
         <script type="text/javascript">
-            fetch('https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/my-api3.php')
+            fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api.4php')
             .then(response => response.json())
             .then(response => {
                 const questionList = document.getElementById("list");
