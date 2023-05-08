@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['Username'])) {
+if (!isset($_SESSION['user_id'])) {
     // User is not authenticated, redirect to login page
     header('Location: https://mi-linux.wlv.ac.uk/~2201053/Survey4All/login.php');
     exit;
@@ -208,20 +208,11 @@ if (!isset($_SESSION['Username'])) {
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
             $questionarray = [];
-            $username = stripslashes($_SESSION['Username']);
-
-            $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
-        
-            $result1 = mysqli_query($con, $sql1);
-            
-            while($rows = mysqli_fetch_assoc($result1)){
-                $userID = $rows['UserID'];
-            }
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
             $sql = $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID)
-                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '$userID')";
+                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '2023502400')";
                 // This puts the SQL syntax into the database.
                 $result = mysqli_query($con, $sql);
             }
@@ -271,6 +262,7 @@ if (!isset($_SESSION['Username'])) {
     <form  action = '' method = 'post' id = 'submitForm' name = 'submitForm'>
         <input type = 'text' id = 'arraytext' name = 'arraytext' value = '' hidden>
         <button type = 'submit' id = 'submitbtn' name = 'submitbtn'>Submit</button>
+        <button class="navbutton" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/dashboard.php'">View Your Surveys</button>
     </form>
 </div>
 <script type="text/javascript">

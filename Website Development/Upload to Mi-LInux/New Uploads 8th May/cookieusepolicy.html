@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey4All</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin-top: 75px;
+            margin-right: 360px;
+            margin-bottom: 75px;
+            margin-left: 360px;
+        }
+
+        h1, h3, p {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: lightgray;
+            width: 100%;
+            height: 100px;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .popup {
+            background-color: lightgray;
+            width: 450px;
+            padding: 30px 40px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            border-radius: 8px;
+            font-family: "Poppins",sans-serif;
+            display: none;
+            text-align: center;
+        }
+
+        .popup button {
+            display: block;
+            margin:  0 0 20px auto;
+            background-color: transparent;
+            font-size: 30px;
+            color: black;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .popup p {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: justify;
+            margin: 20px 0;
+            line-height: 25px;
+        }
+
+        .logo {
+            float: left;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+        }
+
+        ul li {
+            margin: 20px 20px;
+        }
+
+        ul li p {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .navbutton, .dropbtn {
+            background-color: lightgray;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: lightgray;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .navbutton:hover, .dropbtn:hover {
+            background-color: white;
+            color: black;
+        }
+
+        #login, #register {
+            background-color: gray;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .container {
+            width: 100%;
+            height: 500px;
+        }
+
+        #login:hover, #register:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .frames {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        h1, h3, p {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body onload="showSection(home)">
+<div class="popup">
+    <button id="close">&times;</button>
+    <h2>Alert</h2>
+    <p>
+        By using the website you are agreeing to the Terms of Service, Privacy Policy, and Cookie Use Policy.
+        <br><br>
+        They can be found here:
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_termsofservice.html">Terms of Service</a>
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_privacypolicy.html">Privacy Policy</a>
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_cookieusepolicy.html">Cookie Use Policy</a>
+    </p>
+</div>
+<header>
+    <img src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/Survey4AllLogo.png" alt="Logo" class="logo">
+    <nav>
+        <ul>
+            <li>
+                <button class="navbutton" id="home" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html';">Home</button>
+                <button class="navbutton" id="vs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/viewsurveys.html';">View Surveys</button>
+                <button class="navbutton" id="cs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/createsurveys.php';">Create Surveys</button>
+                <button class="navbutton" id="contact" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/contactus.html';">Contact Us</button>
+                <button class="navbutton" id="va" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/myaccount.php';">My Account</button>
+                <div class="dropdown">
+                    <button class="dropbtn" id="legal">Legal</button>
+                    <div class="dropdown-content">
+                        <button class="navbutton" id="tos" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/termsofservice.html';">Terms of Service</button>
+                        <button class="navbutton" id="priv" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/privacypolicy.html';">Privacy Policy</button>
+                        <button class="navbutton" id="cook" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/cookieusepolicy.html';">Cookie Use Policy</button>
+                    </div>
+                </div>
+                <button class="navbutton" id="login" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/login.php';">Login</button>
+                <button class="navbutton" id="register" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/registration.php';">Register</button>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <h1>COOKIE USE POLICY</h1>
+    <br>
+    <p>This Cookie Use Policy explains how we use cookies and similar technologies on our website. By using our website, you consent to our use of cookies in accordance with this policy.</p>
+
+    <h3>What are cookies?</h3>
+    <p>Cookies are small text files that are placed on your device when you access our website. They are widely used in order to make websites work, or work more efficiently, as well as to provide information to the owners of the site.</p>
+
+    <h3>Types of cookies we use</h3>
+    <p>We use both session cookies and persistent cookies on our website. Session cookies are temporary cookies that expire when you close your browser, while persistent cookies remain on your device until they expire or are deleted.</p>
+
+    <h3>We use the following types of cookies on our website:</h3>
+    <p>•	Strictly necessary cookies: These cookies are essential to enable you to move around the website and use its features, such as accessing secure areas of the website. Without these cookies, services you have asked for cannot be provided.</p>
+    <p>•	Performance cookies: These cookies collect information about how visitors use our website, for example which pages are visited most often. We use this information to improve our website and to make it easier for you to navigate.</p>
+    <p>•	Functionality cookies: These cookies allow our website to remember choices you make (such as your language or the region you are in) and provide enhanced, more personalized features.</p>
+
+    <h3>Third-party cookies</h3>
+    <p>In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the website, deliver advertisements on and through the website, and so on. These cookies are used by third-party services such as Google Analytics, Facebook, Twitter, and LinkedIn.</p>
+
+    <h3>Your cookie choices</h3>
+    <p>You can control and manage cookies in various ways. Please note that removing or blocking cookies may affect your user experience and some parts of our website may no longer be fully accessible. For more information on how to manage cookies, please refer to your browser's help or settings section.</p>
+
+    <h3>Changes to this Cookie Use Policy</h3>
+    <p>We may update this Cookie Use Policy from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal or regulatory reasons. We encourage you to periodically review this Cookie Use Policy to stay informed about our use of cookies.</p>
+
+    <h3>Contact us</h3>
+    <p>If you have any questions about our use of cookies or this Cookie Use Policy, please message us through the CONTACT US page.
+</div>
+</body>
+</html>
