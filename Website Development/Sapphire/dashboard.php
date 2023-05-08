@@ -75,6 +75,7 @@ if(!isset($_SESSION["Username"])){
             </form>
         </body>
         <script type="text/javascript">
+<<<<<<< HEAD
           var UserID = <?php require('db.php');
           $username = stripslashes($_SESSION['Username']);
 
@@ -89,6 +90,9 @@ if(!isset($_SESSION["Username"])){
           ?>
           console.log(UserID);
           /*  fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api4.php?userid=' + UserID)
+=======
+            fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api4.php')
+>>>>>>> e71cc973faa62133de33a5d3471b3e28c24e1d05
             .then(response => response.json())
             .then(response => {
                 const questionList = document.getElementById("list");
