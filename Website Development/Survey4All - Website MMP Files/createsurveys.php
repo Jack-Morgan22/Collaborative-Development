@@ -209,7 +209,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             $questionarray = [];
             $username = stripslashes($_SESSION('Username'));
 
-            $sql1 = 'SELECT UserID FROM `Users` WHERE Username = `$username`';
+            $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
         
             $result1 = mysqli_query($conn, $sql);
         
