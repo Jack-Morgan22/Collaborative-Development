@@ -208,7 +208,7 @@ if (!isset($_SESSION['Username'])) {
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
             $questionarray = [];
-            $username = stripslashes($_SESSION('Username'));
+            $username = stripslashes($_SESSION['Username']);
 
             $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
         
