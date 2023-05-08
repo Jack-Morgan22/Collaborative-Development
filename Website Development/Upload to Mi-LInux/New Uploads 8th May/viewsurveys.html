@@ -149,10 +149,6 @@
             height: 500px;
             border: none;
         }
-
-        .mark {
-            background-color:red;
-        }
     </style>
     <script src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/td_style.css">
@@ -198,10 +194,7 @@
     </nav>
 </header>
 <div class="container">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <input type="text" id="search" onkeyup="searchList()" placeholder="Search for surveys...">
-    <button onclick="hgihtwords($('#search').val())">Highlight Words</button>
-    <button onclick="resetHighlight()">Reset Highlight</button>
+    <input type="text" id="searchBar" onkeyup="searchList()" placeholder="Search for surveys...">
     <form id="surveyform">
         <div id="list">
             <ul id="unorderedlist"></ul>
@@ -209,27 +202,6 @@
     </form>
 </div>
 <script type="text/javascript">
-    unction hgihtwords(keyword){
-        $('.need-to-highlight').each(function(index, elem){
-            let oldHtml = $(elem).html()
-            let newHtml = oldHtml.replace(new RegExp('(<[a-z1-9]+>.*?)('+keyword+')(.*?<\/[a-z1-9]+>)', 'ig'), '$1<span class="mark">$2</span>$3')
-            if(oldHtml == newHtml){
-                $(elem).hide()
-            }
-            else{
-                $(elem).show().html( newHtml)
-            }
-
-        })
-    }
-
-    function resetHighlight(){
-        $('.need-to-highlight').each(function(index, elem){
-            let oldHtml = $(elem).html()
-            let newHtml = oldHtml.replace(new RegExp('(<span class="mark">)+(.*?)(</span>)+', 'ig'), '$2')
-            $(elem).show().html( newHtml)
-        });
-    }
     fetch('https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/my-api3.php')
         .then(response => response.json())
         .then(response => {
@@ -249,7 +221,7 @@
 
         function searchList(){
             var input, filter, li, a, i, textValue;
-            input = document.getElementById("search");
+            input = document.getElementById("searchBar");
             filter = input.value.toUpperCase();
             li = document.getElementById("unorderedlist").querySelectorAll("li");
 
