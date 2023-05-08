@@ -87,8 +87,8 @@ if(!isset($_SESSION["Username"])){
           }
           echo($userID);
           ?>
-          console.log(UserID);
-          /*  fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api4.php?userid=' + UserID)
+          UserID = "?userid=" + UserID;
+          fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api4.php' + UserID)
             .then(response => response.json())
             .then(response => {
                 const questionList = document.getElementById("list");
@@ -107,7 +107,7 @@ if(!isset($_SESSION["Username"])){
             function shareLink(surveyID) {
                 var link = "https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/answer.php?id=" + surveyID;
                 window.prompt("Copy this link and share:", link);
-            }*/
+            }
         </script>
         <p><a href="logout.php">Logout</a></p>
         <p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/createsurveys.php">Create survey</a></p>
