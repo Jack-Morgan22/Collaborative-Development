@@ -86,7 +86,7 @@ if(!isset($_SESSION["Username"])){
               $userID = $rows['UserID'];
           }
           echo($userID);
-          ?>
+          ?>;
           UserID = "?userid=" + UserID;
           fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api4.php' + UserID)
             .then(response => response.json())
