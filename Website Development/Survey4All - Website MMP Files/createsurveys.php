@@ -207,11 +207,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
             $questionarray = [];
+            $username = $_SESSION('Username');
+
+            $sql1 = 'SELECT UserID FROM `Users` WHERE Username = '$username'';
+        
+            $result1 = mysqli_query($conn, $sql);
+        
+            $userID = $result1;
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
             $sql = $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID)
-                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '2023502400')";
+                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '$userID')";
                 // This puts the SQL syntax into the database.
                 $result = mysqli_query($con, $sql);
             }
