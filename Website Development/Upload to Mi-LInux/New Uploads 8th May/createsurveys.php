@@ -215,6 +215,8 @@ if (!isset($_SESSION['Username'])) {
             $result1 = mysqli_query($con, $sql1);
         
             $userID = $result1;
+
+            $userID = implode("", $userID);
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
