@@ -255,6 +255,7 @@ if (!isset($_SESSION['Username'])) {
             <input type = 'text' id = 'arraytext' name = 'arraytext' value = '' hidden>
             <button type = 'submit' id = 'submitbtn' name = 'submitbtn'>Submit</button>
         </form>
+        <button class="navbutton" id="tos" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/viewsurveys.html';">View Surveys</button>
     </div>
     <script type="text/javascript">
         // Select the form, input, and list elements from the HTML
