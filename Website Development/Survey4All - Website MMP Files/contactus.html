@@ -56,9 +56,9 @@
 
         .logo {
             float: left;
-            height: 50%;
-            width: 20%;
-            margin: 20px 5px;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
         }
 
         ul {
@@ -127,6 +127,7 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
+            z-index: 1;
         }
 
         .dropdown:hover .dropdown-content {
@@ -155,15 +156,52 @@
             flex-direction: column;
             position: relative;
             text-align: center;
+            margin: 25px 100px;
         }
 
-        input[type=submit], input[type=text], input[type=email], h2, textarea {
+        h2 {
+            color: #666;
+            margin: 0px auto 25px;
+            font-size: 25px;
+            font-weight: 300;
             text-align: center;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            font-size: 15px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 25px;
+            height: 25px;
+            width: calc(100% - 23px);
+        }
+
+        textarea {
+            font-size: 15px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 25px;
+            height: 150px;
             font-family: Arial, sans-serif;
         }
-        input[type=text], input[type=email] {
-            height: 50px;
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color:#6e8095;
+            outline: none;
         }
+
+        .message {
+            color: #666;
+            font-family: Arial, sans-serif;
+        }
+        .message a {
+            color: #666;
+            font-family: Arial, sans-serif;
+        }
+
         input[type=submit] {
             background-color: #04AA6D;
             border: none;
@@ -249,6 +287,7 @@
             <input type="email" name="email" placeholder='Email..'>
             <textarea name="message" cols="30" rows="10" placeholder='Message..'></textarea>
             <input type="submit" class="submit">
+            <p class="link"><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Home</a></p>
         </form>
     </div>
     <script>

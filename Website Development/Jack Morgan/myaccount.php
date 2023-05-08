@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION["Username"])){
+    header("Location: login.php");//If user not logged in redirect to the login page
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,9 +63,9 @@
 
         .logo {
             float: left;
-            height: 50%;
-            width: 20%;
-            margin: 20px 5px;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
         }
 
         ul {
@@ -110,11 +117,6 @@
             transition-duration: 0.4s;
         }
 
-        #login:hover, #register:hover {
-            background-color: white;
-            color: black;
-        }
-
         .dropdown {
             position: relative;
             display: inline-block;
@@ -154,8 +156,84 @@
             border: none;
         }
 
-        h1, h3, p {
+        form {
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            text-align: center;
+        }
+
+        input[type=submit], input[type=text], input[type=email], h2, textarea {
+            text-align: center;
             font-family: Arial, sans-serif;
+        }
+        input[type=text], input[type=email] {
+            height: 50px;
+        }
+        input[type=submit] {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+        input[type=submit]:hover {
+            background-color: lightgray;
+            color: black;
+        }
+
+        #login:hover, #register:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .button {
+            background-color: #04AA6D;
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    transition-duration: 0.4s;
+        }
+
+        button:hover {
+            background-color: lightgray;
+                    color: black;
+        }
+
+        .center {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+
+        form * {
+            width: 100%;
+            margin-top: 2px;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 90%; /* changed to 90% */
+            margin: 0 auto;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #cccccc; /* light gray */
         }
     </style>
 </head>
@@ -200,42 +278,54 @@
     </nav>
 </header>
 <div class="container">
-    <h1>PRIVACY POLICY</h1>
-    <br>
-    <h3>Introduction</h3>
-    <p>We take the protection of your personal data seriously and are committed to ensuring that your privacy is respected, and your data is kept secure. This Privacy Policy explains how we collect, use, and protect your personal data.</p>
+    <?php
 
-    <h3>Data Collection</h3>
-    <p>We will collect the following personal data from you:</p>
-    <p>•	Name</p>
-    <p>•	Email address</p>
-    <p>•	Date of birth</p>
-    <p>•	Gender</p>
-    <p>•	Country of residence</p>
-    <p>•	Occupation</p>
+        if (!isset($_SESSION['Username'])) {
+            header('Location: login.php');
+            exit();
+        }
 
+        require('db.php');
 
-    <p>We collect this data through our website's registration form and through surveys we send to you. We will only collect the data that is necessary for the purposes for which it is being processed.</p>
+        $Username = $_SESSION['Username'];
+        $query = "SELECT * FROM `Users` WHERE `Username`='$Username'";
+        $result = mysqli_query($con, $query);
+        $row = mysqli_fetch_assoc($result);
+        $Name = $row['Name'];
+        $Email = $row['Email'];
+        $JoinDate = $row['JoinDate'];
+    ?>
+    <div class="form">
+        <h2>Profile Information</h2>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><?php echo $Username; ?></td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><?php echo $Name; ?></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><?php echo $Email; ?></td>
+            </tr>
+            <tr>
+                <td>Join Date:</td>
+                <td><?php echo $JoinDate; ?></td>
+            </tr>
+             <!-- Add more rows to the table for additional information -->
+        </table>
 
-    <h3>Data Use</h3>
-    <p>We will use your personal data to personalize the surveys we send to you, to better understand your preferences, and to improve our services. We will not share your personal data with any third party without your explicit consent.</p>
-
-    <h3>Data Retention</h3>
-    <p>We will only retain your personal data for as long as it is necessary for the purposes for which it was collected. After that, we will securely delete or anonymize your data.</p>
-
-
-
-    <h3>Your Rights</h3>
-    <p>You have the right to access, rectify, or delete your personal data, and to restrict or object to its processing, subject to certain legal requirements. You also have the right to withdraw your consent to the processing of your personal data at any time.</p>
-
-    <h3>Data Security</h3>
-    <p>We take appropriate technical and organizational measures to protect your personal data from loss, misuse, and unauthorized access, disclosure, alteration, and destruction.</p>
-
-    <h3>Updates to this Policy</h3>
-    <p>We may update this Privacy Policy from time to time to reflect changes in our data processing practices. We will notify you of any significant changes to this policy by email or by posting a notice on our website.</p>
-
-    <h3>Contact Information</h3>
-    <p>If you have any questions or concerns about our data processing practices or this Privacy Policy, please message us through the CONTACT US page.</p>
-</div>
+        <table>
+        <tr>
+        <td>
+        <button class="button" onclick="window.location.href='logout.php'">Logout</button>
+        <button class="button" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/dashboard.php'">Dashboard</button>
+        <button class="button" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html'">Home</button>
+        </td>
+        </tr>
+        </table>
+    </div>
 </body>
 </html>

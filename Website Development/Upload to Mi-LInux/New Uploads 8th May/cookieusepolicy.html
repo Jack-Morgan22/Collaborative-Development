@@ -1,10 +1,3 @@
-<?php
-session_start();
-if(!isset($_SESSION["Username"])){
-    header("Location: login.php");//If user not logged in redirect to the login page
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +6,10 @@ if(!isset($_SESSION["Username"])){
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin-top: 75px;
+            margin-right: 360px;
+            margin-bottom: 75px;
+            margin-left: 360px;
         }
 
         h1, h3, p {
@@ -63,9 +60,9 @@ if(!isset($_SESSION["Username"])){
 
         .logo {
             float: left;
-            height: 50%;
-            width: 20%;
-            margin: 20px 5px;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
         }
 
         ul {
@@ -91,20 +88,6 @@ if(!isset($_SESSION["Username"])){
 
         .navbutton, .dropbtn {
             background-color: lightgray;
-            border: none;
-            color: black;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition-duration: 0.4s;
-        }
-
-        #login, #register {
-            background-color: gray;
             border: none;
             color: black;
             padding: 15px 32px;
@@ -145,36 +128,10 @@ if(!isset($_SESSION["Username"])){
             color: black;
         }
 
-        .container {
-            width: 100%;
-            height: 500px;
-        }
-
-        .frames {
-            width: 100%;
-            height: 500px;
+        #login, #register {
+            background-color: gray;
             border: none;
-        }
-
-        form {
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            position: relative;
-            text-align: center;
-        }
-
-        input[type=submit], input[type=text], input[type=email], h2, textarea {
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        input[type=text], input[type=email] {
-            height: 50px;
-        }
-        input[type=submit] {
-            background-color: #04AA6D;
-            border: none;
-            color: white;
+            color: black;
             padding: 15px 32px;
             text-align: center;
             text-decoration: none;
@@ -184,9 +141,10 @@ if(!isset($_SESSION["Username"])){
             cursor: pointer;
             transition-duration: 0.4s;
         }
-        input[type=submit]:hover {
-            background-color: lightgray;
-            color: black;
+
+        .container {
+            width: 100%;
+            height: 500px;
         }
 
         #login:hover, #register:hover {
@@ -194,16 +152,14 @@ if(!isset($_SESSION["Username"])){
             color: black;
         }
 
-        .center {
-            margin: auto;
-            width: 50%;
-            padding: 10px;
+        .frames {
+            width: 100%;
+            height: 500px;
+            border: none;
         }
 
-        form * {
-            width: 100%;
-            margin-top: 2px;
-            text-align: center;
+        h1, h3, p {
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
@@ -248,49 +204,32 @@ if(!isset($_SESSION["Username"])){
     </nav>
 </header>
 <div class="container">
-    <div class="form">
-            <h1 class="login-title">Welcome, <?php echo $_SESSION['Username']; ?>!</h1>
-    <?php
-        // This is where the connection happens through host name, database username, password, and database name.
-        $con = mysqli_connect("localhost","2112834","85rj5j","db2112834");
-        // The database will check connection between the site and database.
-        if (mysqli_connect_errno()){
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        }
+    <h1>COOKIE USE POLICY</h1>
+    <br>
+    <p>This Cookie Use Policy explains how we use cookies and similar technologies on our website. By using our website, you consent to our use of cookies in accordance with this policy.</p>
 
-     // get the user's ID from the session
-        $UserID = $_SESSION['Username'];
-        // establish MySQLi connection
-        // This is where the connection happens through host name, database username, password, and database name.
-        $con = mysqli_connect("localhost","2112834","85rj5j","db2112834");
-        // The database will check connection between the site and database.
-        if (mysqli_connect_errno()){
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        }
-        // query the database for the user's surveys
-        $sql = "SELECT SurveyID, SurveyName FROM SurveyDetails WHERE Users_UserID = '$UserID'";
-        $result = mysqli_query($con, $sql);
-        // display the surveys in a list
-        if (mysqli_num_rows($result) > 0) {
-            echo "<h2>My Surveys</h2>";
-            echo "<ul>";
-            while($row = mysqli_fetch_assoc($result)) {
-                $surveyID = $row['SurveyID'];
-                $surveyName = $row['SurveyName'];
-                // display the survey name with a link to the survey
-                echo "<li><a href='survey.php?id=$surveyID'>$surveyName</a></li>";
-            }
-            echo "</ul>";
-        } else {
-            echo "<p>You haven't created any surveys yet.</p>";
-        }
-        // close the MySQLi connection
-        mysqli_close($con);
-    ?>
+    <h3>What are cookies?</h3>
+    <p>Cookies are small text files that are placed on your device when you access our website. They are widely used in order to make websites work, or work more efficiently, as well as to provide information to the owners of the site.</p>
 
-            <p><a href="logout.php">Logout</a></p>
-    		<p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/createsurveys.php">Create survey</a></p>
-    		<p><a href="dashboard.php">Go to Dashboard</a></p>
-        </div>
+    <h3>Types of cookies we use</h3>
+    <p>We use both session cookies and persistent cookies on our website. Session cookies are temporary cookies that expire when you close your browser, while persistent cookies remain on your device until they expire or are deleted.</p>
+
+    <h3>We use the following types of cookies on our website:</h3>
+    <p>•	Strictly necessary cookies: These cookies are essential to enable you to move around the website and use its features, such as accessing secure areas of the website. Without these cookies, services you have asked for cannot be provided.</p>
+    <p>•	Performance cookies: These cookies collect information about how visitors use our website, for example which pages are visited most often. We use this information to improve our website and to make it easier for you to navigate.</p>
+    <p>•	Functionality cookies: These cookies allow our website to remember choices you make (such as your language or the region you are in) and provide enhanced, more personalized features.</p>
+
+    <h3>Third-party cookies</h3>
+    <p>In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the website, deliver advertisements on and through the website, and so on. These cookies are used by third-party services such as Google Analytics, Facebook, Twitter, and LinkedIn.</p>
+
+    <h3>Your cookie choices</h3>
+    <p>You can control and manage cookies in various ways. Please note that removing or blocking cookies may affect your user experience and some parts of our website may no longer be fully accessible. For more information on how to manage cookies, please refer to your browser's help or settings section.</p>
+
+    <h3>Changes to this Cookie Use Policy</h3>
+    <p>We may update this Cookie Use Policy from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal or regulatory reasons. We encourage you to periodically review this Cookie Use Policy to stay informed about our use of cookies.</p>
+
+    <h3>Contact us</h3>
+    <p>If you have any questions about our use of cookies or this Cookie Use Policy, please message us through the CONTACT US page.
+</div>
 </body>
 </html>

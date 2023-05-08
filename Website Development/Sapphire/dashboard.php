@@ -63,6 +63,7 @@ if(!isset($_SESSION["Username"])){
 <body>
     <div class="form">
         <h1 class="login-title">Welcome, <?php echo $_SESSION['Username']; ?>!</h1>
+        <p>Listed here is all your user created surveys!</p>
         <head>
             <script src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/jquery-3.6.3.min.js"></script>
             <link rel="stylesheet" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/td_style.css">
@@ -75,7 +76,20 @@ if(!isset($_SESSION["Username"])){
             </form>
         </body>
         <script type="text/javascript">
-            fetch('https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/my-api3.php')
+          var UserID = <?php require('db.php');
+          $username = stripslashes($_SESSION['Username']);
+
+          $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
+
+          $result1 = mysqli_query($con, $sql1);
+
+          while($rows = mysqli_fetch_assoc($result1)){
+              $userID = $rows['UserID'];
+          }
+          echo($userID);
+          ?>;
+          UserID = "?userid=" + UserID;
+          fetch('https://mi-linux.wlv.ac.uk/~2201053/Survey4All/my-api4.php' + UserID)
             .then(response => response.json())
             .then(response => {
                 const questionList = document.getElementById("list");

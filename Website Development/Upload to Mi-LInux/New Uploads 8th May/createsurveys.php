@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['Username'])) {
+    // User is not authenticated, redirect to login page
+    header('Location: https://mi-linux.wlv.ac.uk/~2201053/Survey4All/login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +14,6 @@
         body {
             font-family: Arial, sans-serif;
         }
-
         header {
             background-color: lightgray;
             width: 100%;
@@ -15,7 +22,6 @@
             margin: 0;
             padding: 0;
         }
-
         .popup {
             background-color: lightgray;
             width: 450px;
@@ -29,7 +35,6 @@
             display: none;
             text-align: center;
         }
-
         .popup button {
             display: block;
             margin:  0 0 20px auto;
@@ -40,7 +45,6 @@
             outline: none;
             cursor: pointer;
         }
-
         .popup p {
             font-family: Arial, sans-serif;
             font-size: 14px;
@@ -48,14 +52,12 @@
             margin: 20px 0;
             line-height: 25px;
         }
-
         .logo {
             float: left;
-            height: 50%;
-            width: 20%;
-            margin: 20px 5px;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
         }
-
         nav ul {
             margin: 0;
             padding: 0;
@@ -63,11 +65,9 @@
             display: flex;
             flex-direction: row;
         }
-
         nav ul li {
             margin: 20px 20px;
         }
-
         nav ul li p {
             color: #fff;
             text-decoration: none;
@@ -76,7 +76,6 @@
             border-radius: 5px;
             transition: background-color 0.3s ease-in-out;
         }
-
         .navbutton, .dropbtn {
             background-color: lightgray;
             border: none;
@@ -90,7 +89,6 @@
             cursor: pointer;
             transition-duration: 0.4s;
         }
-
         #login, #register {
                     background-color: gray;
                     border: none;
@@ -104,12 +102,10 @@
                     cursor: pointer;
                     transition-duration: 0.4s;
         }
-
         .dropdown {
             position: relative;
             display: inline-block;
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
@@ -123,26 +119,21 @@
             margin: 4px 2px;
             cursor: pointer;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
         .navbutton:hover, .dropbtn:hover {
             background-color: white;
             color: black;
         }
-
         #login:hover, #register:hover {
                     background-color: white;
                     color: black;
                 }
-
         .container {
             width: 100%;
             height: 500px;
         }
-
         .frames {
             width: 100%;
             height: 500px;
@@ -200,11 +191,23 @@
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
             $questionarray = [];
+            $username = stripslashes($_SESSION['Username']);
+            $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
+
+            $result1 = mysqli_query($con, $sql1);
+
+            $userID = $result1;
+
+            $userID = implode("", $userID);
+
+            while($rows = mysqli_fetch_assoc($result1)){
+                $userID = $rows['UserID'];
+            }
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
             $sql = $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID)
-                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '2023502400')";
+                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '$userID')";
                 // This puts the SQL syntax into the database.
                 $result = mysqli_query($con, $sql);
             }
@@ -254,6 +257,7 @@
     <form  action = '' method = 'post' id = 'submitForm' name = 'submitForm'>
         <input type = 'text' id = 'arraytext' name = 'arraytext' value = '' hidden>
         <button type = 'submit' id = 'submitbtn' name = 'submitbtn'>Submit</button>
+        <button class="navbutton" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/dashboard.php'">View Your Surveys</button>
     </form>
 </div>
 <script type="text/javascript">
@@ -263,17 +267,14 @@
     const itemsList = document.querySelector('#items');
     const selectQuestion = document.getElementById('questionType');
     const liSpan = document.getElementById('Number');
-
     // Select the arraytext input and buttons
     const arraystringvalue = document.getElementById('arraytext');
     const addButton = document.getElementById('add-btn');
     const submitButton = document.getElementById('submit-btn');
-
     // This makes the empty arrays and strings.
     let listArray = [];
     var arraystring = '';
     const items = [];
-
     // Display the items in the list
     function displayItems() {
         // Create an array of list items, one for each item in the items array
@@ -287,7 +288,6 @@
         // the list element in the HTML
         itemsList.innerHTML = itemsHTML.join('');
     }
-
     // Add a new item to the list
     function addItem(e) {
         // Prevent the default form submission
@@ -308,7 +308,6 @@
         }
         arraystringvalue.value = arraystring;
     }
-
     // Delete an item from the list
     function deleteItem(e) {
         // Check if the clicked element is a delete button
@@ -324,12 +323,10 @@
             displayItems();
         }
     }
-
     // Add event listeners to the form and list elements
     form.addEventListener('submit', addItem);
     //form.addEventListener(submitButton, itemsIntoArray);
     itemsList.addEventListener('click', deleteItem);
-
     // Call the displayItems function to initially display the items
     // in the list
     displayItems();

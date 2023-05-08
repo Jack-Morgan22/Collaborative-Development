@@ -4,21 +4,12 @@
     if(!$conn){
         echo "Connection error," . mysqli_connect_error();
     }
-    $username = $_SESSION('Username');
 
-    $sql1 = 'SELECT UserID FROM `Users` WHERE Username = '$username'';
+    $id = htmlspecialchars($_GET['id']);
 
-    $result1 = mysqli_query($conn, $sql);
-
-    $userID = $result1;
-
-    $sql = 'SELECT * FROM `SurveyDetails` WHERE User_UserID = '$userID'';
+    $sql = 'SELECT `SurveyName` FROM `SurveyDetails` WHERE SurveyID = "'.$id.'"';
 
     $result = mysqli_query($conn, $sql);
-
-    while($row = mysqli_fetch_assoc($result)){
-        $json[] = $row;
-    }
 
     // Error ?
     if($result == null) {
@@ -26,7 +17,8 @@
     }
 
     // Get data, convert to JSON and print
-    echo json_encode($json);
+    $row = $result -> fetch_assoc();
+    echo json_encode($row);
 
     // Free result set and close connection
     $result -> free_result();

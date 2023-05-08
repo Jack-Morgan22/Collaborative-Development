@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION["Username"])){
+    header("Location: login.php");//If user not logged in redirect to the login page
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,19 +136,8 @@
             cursor: pointer;
         }
 
-        .templates {
-            display: grid;
-            grid-template-columns: auto auto auto;
-            padding: 10px;
-        }
-
         .dropdown:hover .dropdown-content {
             display: block;
-        }
-
-        #login:hover, #register:hover {
-            background-color: white;
-            color: black;
         }
 
         .navbutton:hover, .dropbtn:hover {
@@ -159,22 +155,102 @@
             height: 500px;
             border: none;
         }
+
+        form {
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            text-align: center;
+        }
+
+        input[type=submit], input[type=text], input[type=email], h2, textarea {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        input[type=text], input[type=email] {
+            height: 50px;
+        }
+        input[type=submit] {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+        input[type=submit]:hover {
+            background-color: lightgray;
+            color: black;
+        }
+
+        #login:hover, #register:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .button {
+            background-color: #04AA6D;
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    transition-duration: 0.4s;
+        }
+
+        button:hover {
+            background-color: lightgray;
+                    color: black;
+        }
+
+        .center {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+
+        form * {
+            width: 100%;
+            margin-top: 2px;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 90%; /* changed to 90% */
+            margin: 0 auto;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #cccccc; /* light gray */
+        }
     </style>
 </head>
 <body onload="showSection(home)">
 <div class="popup">
     <button id="close">&times;</button>
-    <h2>Legal Notice</h2>
+    <h2>Alert</h2>
     <p>
         By using the website you are agreeing to the Terms of Service, Privacy Policy, and Cookie Use Policy.
         <br><br>
         They can be found here:
         <br>
-        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/termsofservice_.html">Terms of Service</a>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_termsofservice.html">Terms of Service</a>
         <br>
-        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/privacypolicy_.html">Privacy Policy</a>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_privacypolicy.html">Privacy Policy</a>
         <br>
-        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/cookieusepolicy_.html">Cookie Use Policy</a>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/_cookieusepolicy.html">Cookie Use Policy</a>
     </p>
 </div>
 <header>
@@ -202,42 +278,54 @@
     </nav>
 </header>
 <div class="container">
-    <h1>Survey4All</h1>
-    <p>
-        Welcome to Survey4All, an online survey tool created for individuals looking to acquire real data from real people.
-        With the help of a wide range of tools on our forward thinking platform, you can easily develop, distribute, and analyse your surveys.
-        You can tailor surveys to your particular needs using our user-friendly interface, from commercial and market research to educational and academic surveys.
-        You can make informed decisions thanks to the useful insights our specialised analytics tools give you.
-    </p>
-    <br>
-    <br>
-    <h3>Tutorials</h3>
-    <div class="templates">
-        <div>
-            <p>Login and Registration Tutorial: <a href="https://youtu.be/uXrn1pYIPHA">Click Here</a></p>
-            <iframe width="420" height="315"
-                    src="https://youtube.com/embed/uXrn1pYIPHA">
-            </iframe>
-        </div>
-        <div>
-            <p>Survey Creation Tutorial: <a href="https://youtu.be/VS7VoH5Pxig">Click Here</a></p>
-            <iframe width="420" height="315"
-                    src="https://www.youtube.com/embed/VS7VoH5Pxig">
-            </iframe>
-        </div>
+    <?php
+
+        if (!isset($_SESSION['Username'])) {
+            header('Location: login.php');
+            exit();
+        }
+
+        require('db.php');
+
+        $Username = $_SESSION['Username'];
+        $query = "SELECT * FROM `Users` WHERE `Username`='$Username'";
+        $result = mysqli_query($con, $query);
+        $row = mysqli_fetch_assoc($result);
+        $Name = $row['Name'];
+        $Email = $row['Email'];
+        $JoinDate = $row['JoinDate'];
+    ?>
+    <div class="form">
+        <h2>Profile Information</h2>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><?php echo $Username; ?></td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><?php echo $Name; ?></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><?php echo $Email; ?></td>
+            </tr>
+            <tr>
+                <td>Join Date:</td>
+                <td><?php echo $JoinDate; ?></td>
+            </tr>
+             <!-- Add more rows to the table for additional information -->
+        </table>
+
+        <table>
+        <tr>
+        <td>
+        <button class="button" onclick="window.location.href='logout.php'">Logout</button>
+        <button class="button" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/dashboard.php'">View Your Surveys</button>
+        <button class="button" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html'">Home</button>
+        </td>
+        </tr>
+        </table>
     </div>
-</div>
-<script>
-    window.addEventListener("load", function(){
-        setTimeout(
-            function open(event){
-                document.querySelector(".popup").style.display = "block";
-            },
-        )
-    });
-    document.querySelector("#close").addEventListener("click", function(){
-        document.querySelector(".popup").style.display = "none";
-    });
-</script>
 </body>
 </html>

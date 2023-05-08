@@ -63,9 +63,9 @@ if(!isset($_SESSION["Username"])){
 
         .logo {
             float: left;
-            height: 50%;
-            width: 20%;
-            margin: 20px 5px;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
         }
 
         ul {
@@ -194,6 +194,25 @@ if(!isset($_SESSION["Username"])){
             color: black;
         }
 
+        .button {
+            background-color: #04AA6D;
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    transition-duration: 0.4s;
+        }
+
+        button:hover {
+            background-color: lightgray;
+                    color: black;
+        }
+
         .center {
             margin: auto;
             width: 50%;
@@ -204,6 +223,17 @@ if(!isset($_SESSION["Username"])){
             width: 100%;
             margin-top: 2px;
             text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 90%; /* changed to 90% */
+            margin: 0 auto;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #cccccc; /* light gray */
         }
     </style>
 </head>
@@ -248,50 +278,54 @@ if(!isset($_SESSION["Username"])){
     </nav>
 </header>
 <div class="container">
-    <div class="form">
-            <h1 class="login-title">Welcome, <?php echo $_SESSION['Username']; ?>!</h1>
     <?php
-        // This is where the connection happens through host name, database username, password, and database name.
-        $con = mysqli_connect("localhost","2112834","85rj5j","db2112834");
-        // The database will check connection between the site and database.
-        if (mysqli_connect_errno()){
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+        if (!isset($_SESSION['Username'])) {
+            header('Location: login.php');
+            exit();
         }
 
-     // get the user's ID from the session
-        $UserID = $_SESSION['Username'];
-        // establish MySQLi connection
-        // This is where the connection happens through host name, database username, password, and database name.
-        $con = mysqli_connect("localhost","2112834","85rj5j","db2112834");
-        // The database will check connection between the site and database.
-        if (mysqli_connect_errno()){
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        }
-        // query the database for the user's surveys
-        $sql = "SELECT SurveyID, SurveyName FROM SurveyDetails WHERE Users_UserID = '$UserID'";
-        $result = mysqli_query($con, $sql);
-        // display the surveys in a list
-        if (mysqli_num_rows($result) > 0) {
-            echo "<h2>My Surveys</h2>";
-            echo "<ul>";
-            while($row = mysqli_fetch_assoc($result)) {
-                $surveyID = $row['SurveyID'];
-                $surveyName = $row['SurveyName'];
-                // display the survey name with a link to the survey
-                echo "<li><a href='survey.php?id=$surveyID'>$surveyName</a></li>";
-            }
-            echo "</ul>";
-        } else {
-            echo "<p>You haven't created any surveys yet.</p>";
-        }
-        // close the MySQLi connection
-        mysqli_close($con);
+        require('db.php');
+
+        $Username = $_SESSION['Username'];
+        $query = "SELECT * FROM `Users` WHERE `Username`='$Username'";
+        $result = mysqli_query($con, $query);
+        $row = mysqli_fetch_assoc($result);
+        $Name = $row['Name'];
+        $Email = $row['Email'];
+        $JoinDate = $row['JoinDate'];
     ?>
+    <div class="form">
+        <h2>Profile Information</h2>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><?php echo $Username; ?></td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><?php echo $Name; ?></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><?php echo $Email; ?></td>
+            </tr>
+            <tr>
+                <td>Join Date:</td>
+                <td><?php echo $JoinDate; ?></td>
+            </tr>
+             <!-- Add more rows to the table for additional information -->
+        </table>
 
-            <p><a href="logout.php">Logout</a></p>
-    		<p><a href="survey.php">Create survey</a></p>
-    		<p><a href="Profile.php">My Profile</a></p>
-    		<p><a href="dashboard.php">Go to Dashboard</a></p>
-        </div>
+        <table>
+        <tr>
+        <td>
+        <button class="button" onclick="window.location.href='logout.php'">Logout</button>
+        <button class="button" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/dashboard.php'">Dashboard</button>
+        <button class="button" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html'">Home</button>
+        </td>
+        </tr>
+        </table>
+    </div>
 </body>
 </html>

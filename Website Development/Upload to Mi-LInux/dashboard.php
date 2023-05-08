@@ -69,6 +69,7 @@ h3 {
 <body>
     <div class="form">
         <h1 class="login-title">Welcome, <?php echo $_SESSION['Username']; ?>!</h1>
+        <p>Listed here is all your user created surveys!</p>
                 <head>
                     <script src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/jquery-3.6.3.min.js"></script>
                     <link rel="stylesheet" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/td_style.css">

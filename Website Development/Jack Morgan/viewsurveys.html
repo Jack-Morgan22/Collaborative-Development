@@ -1,10 +1,3 @@
-<?php
-session_start();
-if(!isset($_SESSION["Username"])){
-    header("Location: login.php");//If user not logged in redirect to the login page
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +5,6 @@ if(!isset($_SESSION["Username"])){
     <title>Survey4All</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-        }
-
-        h1, h3, p {
             font-family: Arial, sans-serif;
         }
 
@@ -63,12 +52,12 @@ if(!isset($_SESSION["Username"])){
 
         .logo {
             float: left;
-            height: 50%;
-            width: 20%;
-            margin: 20px 5px;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
         }
 
-        ul {
+        nav ul {
             margin: 0;
             padding: 0;
             list-style: none;
@@ -76,11 +65,11 @@ if(!isset($_SESSION["Username"])){
             flex-direction: row;
         }
 
-        ul li {
+        nav ul li {
             margin: 20px 20px;
         }
 
-        ul li p {
+        nav ul li p {
             color: #fff;
             text-decoration: none;
             font-weight: bold;
@@ -145,6 +134,11 @@ if(!isset($_SESSION["Username"])){
             color: black;
         }
 
+        #login:hover, #register:hover {
+            background-color: white;
+            color: black;
+        }
+
         .container {
             width: 100%;
             height: 500px;
@@ -155,87 +149,9 @@ if(!isset($_SESSION["Username"])){
             height: 500px;
             border: none;
         }
-
-        form {
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            position: relative;
-            text-align: center;
-        }
-
-        input[type=submit], input[type=text], input[type=email], h2, textarea {
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        input[type=text], input[type=email] {
-            height: 50px;
-        }
-        input[type=submit] {
-            background-color: #04AA6D;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition-duration: 0.4s;
-        }
-        input[type=submit]:hover {
-            background-color: lightgray;
-            color: black;
-        }
-
-        #login:hover, #register:hover {
-            background-color: white;
-            color: black;
-        }
-
-        .button {
-            background-color: #04AA6D;
-                    border: none;
-                    color: white;
-                    padding: 15px 32px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                    margin: 4px 2px;
-                    cursor: pointer;
-                    transition-duration: 0.4s;
-        }
-
-        button:hover {
-            background-color: lightgray;
-                    color: black;
-        }
-
-        .center {
-            margin: auto;
-            width: 50%;
-            padding: 10px;
-        }
-
-        form * {
-            width: 100%;
-            margin-top: 2px;
-            text-align: center;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 90%; /* changed to 90% */
-            margin: 0 auto;
-        }
-
-        td {
-            padding: 10px;
-            border: 1px solid #cccccc; /* light gray */
-        }
     </style>
+    <script src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/td_style.css">
 </head>
 <body onload="showSection(home)">
 <div class="popup">
@@ -278,54 +194,47 @@ if(!isset($_SESSION["Username"])){
     </nav>
 </header>
 <div class="container">
-    <?php
+    <input type="text" id="searchBar" onkeyup="searchList()" placeholder="Search for surveys...">
+    <form id="surveyform">
+        <div id="list">
+            <ul id="unorderedlist"></ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    fetch('https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/my-api3.php')
+        .then(response => response.json())
+        .then(response => {
+            const questionList = document.getElementById("list");
+            let i = 0;
+            var list = $("#list").find('ul');
+            while(i < response.length){
+                var stringAppend =`<li><a id="${response[i].SurveyName}" name="${response[i].SurveyName}" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/answer.php?id=${response[i].SurveyID}">"${response[i].SurveyName}"</a></li>`;
+                list.append(`${stringAppend}`);
+                console.log(response[i].SurveyName);
+                i++;
+            }
+        })
+        .catch(err =>{
+            console.log(err);
+        })
 
-        if (!isset($_SESSION['Username'])) {
-            header('Location: login.php');
-            exit();
+        function searchList(){
+            var input, filter, li, a, i, textValue;
+            input = document.getElementById("searchBar");
+            filter = input.value.toUpperCase();
+            li = document.getElementById("unorderedlist").querySelectorAll("li");
+
+            for(i = 0; i < li.length; i++){
+                a = li[i].getElementsByTagName("a")[0];
+                textValue = a.textContent || a.innerText;
+                if(textValue.toUpperCase().indexOf(filter) > -1){
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
         }
-
-        require('db.php');
-
-        $Username = $_SESSION['Username'];
-        $query = "SELECT * FROM `Users` WHERE `Username`='$Username'";
-        $result = mysqli_query($con, $query);
-        $row = mysqli_fetch_assoc($result);
-        $Name = $row['Name'];
-        $Email = $row['Email'];
-        $JoinDate = $row['JoinDate'];
-    ?>
-    <div class="form">
-        <h2>Profile Information</h2>
-        <table>
-            <tr>
-                <td>Username:</td>
-                <td><?php echo $Username; ?></td>
-            </tr>
-            <tr>
-                <td>Name:</td>
-                <td><?php echo $Name; ?></td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><?php echo $Email; ?></td>
-            </tr>
-            <tr>
-                <td>Join Date:</td>
-                <td><?php echo $JoinDate; ?></td>
-            </tr>
-             <!-- Add more rows to the table for additional information -->
-        </table>
-
-        <table>
-        <tr>
-        <td>
-        <button class="button" onclick="window.location.href='logout.php'">Logout</button>
-        <button class="button" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/dashboard.php'">Dashboard</button>
-        <button class="button" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html'">Home</button>
-        </td>
-        </tr>
-        </table>
-    </div>
+</script>
 </body>
 </html>

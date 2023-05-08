@@ -4,15 +4,10 @@
     if(!$conn){
         echo "Connection error," . mysqli_connect_error();
     }
-    $username = $_SESSION('Username');
 
-    $sql1 = 'SELECT UserID FROM `Users` WHERE Username = '$username'';
+    $id = htmlspecialchars($_GET['id']);
 
-    $result1 = mysqli_query($conn, $sql);
-
-    $userID = $result1;
-
-    $sql = 'SELECT * FROM `SurveyDetails` WHERE User_UserID = '$userID'';
+    $sql = 'SELECT * FROM `SurveyQuestions` WHERE SurveyDetails_SurveyID = "'.$id.'"';
 
     $result = mysqli_query($conn, $sql);
 

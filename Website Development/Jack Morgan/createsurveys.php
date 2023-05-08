@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['Username'])) {
+    // User is not authenticated, redirect to login page
+    header('Location: https://mi-linux.wlv.ac.uk/~2201053/Survey4All/login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,9 +59,9 @@
 
         .logo {
             float: left;
-            height: 50%;
-            width: 20%;
-            margin: 20px 5px;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
         }
 
         nav ul {
@@ -200,11 +208,20 @@
         if(isset($_REQUEST['surveytitle'])){
             // This sets the question array.
             $questionarray = [];
+            $username = stripslashes($_SESSION['Username']);
+
+            $sql1 = "SELECT UserID FROM `Users` WHERE Username = '$username'";
+        
+            $result1 = mysqli_query($con, $sql1);
+            
+            while($rows = mysqli_fetch_assoc($result1)){
+                $userID = $rows['UserID'];
+            }
             // This requests the title from the HTML and takes away the slashes.
             $surveyname = stripslashes($_REQUEST['surveytitle']);
             // This is the SQL syntax to insert into the survey details.
             $sql = $sql = "INSERT INTO `SurveyDetails` (SurveyID, SurveyName, CreationDate, UploadStatus, UploadDate, Users_UserID)
-                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '2023502400')";
+                VALUES (NULL, '$surveyname', now(), 'Y', NULL, '$userID')";
                 // This puts the SQL syntax into the database.
                 $result = mysqli_query($con, $sql);
             }
