@@ -112,7 +112,7 @@ if(!isset($_SESSION["Username"])){
         </script>
         <p><a href="logout.php">Logout</a></p>
         <p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/createsurveys.php">Create survey</a></p>
-        <p><a href="profile.php">My Profile</a></p>
+        <p><a href="myaccount.php">View Profile</a></p>
         <p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Go to the Home page</a></p>
     </div>
 </body>
