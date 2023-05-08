@@ -69,48 +69,43 @@ h3 {
 <body>
     <div class="form">
         <h1 class="login-title">Welcome, <?php echo $_SESSION['Username']; ?>!</h1>
-<?php
-    // This is where the connection happens through host name, database username, password, and database name.
-    $con = mysqli_connect("localhost","2112834","85rj5j","db2112834");
-    // The database will check connection between the site and database.
-    if (mysqli_connect_errno()){
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    }
-	
- // get the user's ID from the session
-    $UserID = $_SESSION['Username'];
-    // establish MySQLi connection
-    // This is where the connection happens through host name, database username, password, and database name.
-    $con = mysqli_connect("localhost","2112834","85rj5j","db2112834");
-    // The database will check connection between the site and database.
-    if (mysqli_connect_errno()){
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    }
-    // query the database for the user's surveys
-    $sql = "SELECT SurveyID, SurveyName FROM SurveyDetails WHERE Users_UserID = '$UserID'";
-    $result = mysqli_query($con, $sql);
-    // display the surveys in a list
-    if (mysqli_num_rows($result) > 0) {
-        echo "<h2>My Surveys</h2>";
-        echo "<ul>";
-        while($row = mysqli_fetch_assoc($result)) {
-            $surveyID = $row['SurveyID'];
-            $surveyName = $row['SurveyName'];
-            // display the survey name with a link to the survey
-            echo "<li><a href='survey.php?id=$surveyID'>$surveyName</a></li>";
-        }
-        echo "</ul>";
-    } else {
-        echo "<p>You haven't created any surveys yet.</p>";
-    }
-    // close the MySQLi connection
-    mysqli_close($con);
-?>
-
+                <head>
+                    <script src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/jquery-3.6.3.min.js"></script>
+                    <link rel="stylesheet" href="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/td_style.css">
+                </head>
+                <body>
+                    <form id="surveyform">
+                        <div id="list">
+                            <ul></ul>
+                        </div>
+                    </form>
+                </body>
+                <script type="text/javascript">
+                    fetch('https://mi-linux.wlv.ac.uk/~2112834/CollabDev/my-api4.php')
+                    .then(response => response.json())
+                    .then(response => {
+                        const questionList = document.getElementById("list");
+                        let i = 0;
+                        var list = $("#list").find('ul');
+                        while(i < response.length){
+                            var stringAppend =`<li><a id="${response[i].SurveyName}" name="${response[i].SurveyName}" href="#">"${response[i].SurveyName}"</a><button onclick="shareLink('${response[i].SurveyID}')">Share</button></li>`;
+                            list.append(`${stringAppend}`);
+                            console.log(response[i].SurveyName);
+                            i++;
+                        }
+                    })
+                    .catch(err =>{
+                        console.log(err);
+                    })
+                    function shareLink(surveyID) {
+                        var link = "https://mi-linux.wlv.ac.uk/~2112834/CollabDev/SV/answer.php?id=" + surveyID;
+                        window.prompt("Copy this link and share:", link);
+                    }
+                </script>
         <p><a href="logout.php">Logout</a></p>
-		<p><a href="survey.php">Create survey</a></p>
-		<p><a href="Profile.php">My Profile</a></p>
-		<p><a href="dashboard.php">Go to Dashboard</a></p>
+		<p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/createsurveys.php">Create survey</a></p>
+		<p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/myaccount.php">My Profile</a></p>
+		<p><a href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html">Homepage</a></p>
     </div>
 </body>
 </html>

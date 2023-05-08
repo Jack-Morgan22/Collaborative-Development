@@ -52,9 +52,9 @@
 
         .logo {
             float: left;
-            height: 50%;
-            width: 20%;
-            margin: 20px 5px;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
         }
 
         nav ul {
@@ -194,9 +194,10 @@
     </nav>
 </header>
 <div class="container">
+    <input type="text" id="searchBar" onkeyup="searchList()" placeholder="Search for surveys...">
     <form id="surveyform">
         <div id="list">
-            <ul></ul>
+            <ul id="unorderedlist"></ul>
         </div>
     </form>
 </div>
@@ -217,6 +218,23 @@
         .catch(err =>{
             console.log(err);
         })
+
+        function searchList(){
+            var input, filter, li, a, i, textValue;
+            input = document.getElementById("searchBar");
+            filter = input.value.toUpperCase();
+            li = document.getElementById("unorderedlist").querySelectorAll("li");
+
+            for(i = 0; i < li.length; i++){
+                a = li[i].getElementsByTagName("a")[0];
+                textValue = a.textContent || a.innerText;
+                if(textValue.toUpperCase().indexOf(filter) > -1){
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
 </script>
 </body>
 </html>
