@@ -1,0 +1,44 @@
+<script>
+function hgihtwords(keyword){
+    $('.need-to-highlight').each(function(index, elem){
+      let oldHtml = $(elem).html()
+      let newHtml = oldHtml.replace(new RegExp('(<[a-z1-9]+>.*?)('+keyword+')(.*?<\/[a-z1-9]+>)', 'ig'), '$1<span class="mark">$2</span>$3')
+      if(oldHtml == newHtml){
+        $(elem).hide()
+      }
+      else{
+        $(elem).show().html( newHtml)
+      }
+      
+    })
+  }
+  
+  function resetHighlight(){
+    $('.need-to-highlight').each(function(index, elem){
+      let oldHtml = $(elem).html()
+      let newHtml = oldHtml.replace(new RegExp('(<span class="mark">)+(.*?)(</span>)+', 'ig'), '$2')
+      $(elem).show().html( newHtml)
+    });
+  }
+  
+  </script>
+  <style>
+  .mark {
+    background-color:red;
+  }
+</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <input type="text" id="search"/>
+  <button onclick="hgihtwords($('#search').val())">Highlight Words</button>
+  <button onclick="resetHighlight()">Reset Highlight</button>
+  
+  <div class="need-to-highlight">
+    <h2>A Test 1</h2>
+    <p>A 2</p>
+    <b>A tester 3</b>
+  </div>
+  <div class="need-to-highlight">
+    <h2>B teSt 1</h2>
+    <p>B tester 2</p>
+    <b>B 3</b>
+  </div>
