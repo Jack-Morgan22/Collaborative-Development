@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey4All</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h3, p {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: lightgray;
+            width: 100%;
+            height: 100px;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .popup {
+            background-color: lightgray;
+            width: 450px;
+            padding: 30px 40px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            border-radius: 8px;
+            font-family: "Poppins",sans-serif;
+            display: none;
+            text-align: center;
+        }
+
+        .popup button {
+            display: block;
+            margin:  0 0 20px auto;
+            background-color: transparent;
+            font-size: 30px;
+            color: black;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .popup p {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: justify;
+            margin: 20px 0;
+            line-height: 25px;
+        }
+
+        .logo {
+            float: left;
+            height: 40%;
+            width: 15%;
+            margin: 25px 5px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+        }
+
+        ul li {
+            margin: 20px 20px;
+        }
+
+        ul li p {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .navbutton, .dropbtn {
+            background-color: lightgray;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        #login, #register {
+            background-color: gray;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: lightgray;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .templates {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            padding: 10px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        #login:hover, #register:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .navbutton:hover, .dropbtn:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .container {
+            width: 100%;
+            height: 500px;
+        }
+
+        .frames {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        #social, #social:visited {
+            color: darkgray;
+        }
+    </style>
+</head>
+<body onload="showSection(home)">
+<div class="popup">
+    <button id="close">&times;</button>
+    <h2>Legal Notice</h2>
+    <p>
+        By using the website you are agreeing to the Terms of Service, Privacy Policy, and Cookie Use Policy.
+        <br><br>
+        They can be found here:
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/termsofservice_.html">Terms of Service</a>
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/privacypolicy_.html">Privacy Policy</a>
+        <br>
+        <a target="_blank" href="https://mi-linux.wlv.ac.uk/~2201053/Survey4All/cookieusepolicy_.html">Cookie Use Policy</a>
+    </p>
+</div>
+<header>
+    <img src="https://mi-linux.wlv.ac.uk/~2112834/CollabDev/Survey4AllLogo.png" alt="Logo" class="logo">
+    <nav>
+        <ul>
+            <li>
+                <button class="navbutton" id="home" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/homepage.html';">Home</button>
+                <button class="navbutton" id="vs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/viewsurveys.html';">View Surveys</button>
+                <button class="navbutton" id="cs" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/createsurveys.php';">Create Surveys</button>
+                <button class="navbutton" id="contact" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/contactus.html';">Contact Us</button>
+                <button class="navbutton" id="va" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/myaccount.php';">My Account</button>
+                <div class="dropdown">
+                    <button class="dropbtn" id="legal">Legal</button>
+                    <div class="dropdown-content">
+                        <button class="navbutton" id="tos" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/termsofservice.html';">Terms of Service</button>
+                        <button class="navbutton" id="priv" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/privacypolicy.html';">Privacy Policy</button>
+                        <button class="navbutton" id="cook" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/cookieusepolicy.html';">Cookie Use Policy</button>
+                    </div>
+                </div>
+                <button class="navbutton" id="login" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/login.php';">Login</button>
+                <button class="navbutton" id="register" onclick="window.location.href='https://mi-linux.wlv.ac.uk/~2201053/Survey4All/registration.php';">Register</button>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <div id="text"></div>
+    <h1>Survey4All</h1>
+    <p>
+        Welcome to Survey4All, an online survey tool created for individuals looking to acquire real data from real people.
+        With the help of a wide range of tools on our forward thinking platform, you can easily develop, distribute, and analyse your surveys.
+        You can tailor surveys to your particular needs using our user-friendly interface, from commercial and market research to educational and academic surveys.
+        You can make informed decisions thanks to the useful insights our specialised analytics tools give you.
+    </p>
+    <br>
+    <br>
+    <h3>Tutorials</h3>
+    <div class="templates">
+        <div>
+            <p>Login and Registration Tutorial: <a href="https://youtu.be/uXrn1pYIPHA">Click Here</a></p>
+            <p>1: Click on Register page on the navigation bar</p>
+            <p>2: Fill in all detials and agree with the terms of serivce</p>
+            <p>3: On the next page press log in</p>
+            <p>4: Fill in the details with the account you created</p>
+            <iframe width="420" height="315"
+                    src="https://youtube.com/embed/uXrn1pYIPHA">
+            </iframe>
+        </div>
+        <div>
+            <p>Survey Creation Tutorial: <a href="https://youtu.be/VS7VoH5Pxig">Click Here</a></p>
+            <p>1: Click on create surveys page on the navigation bar</p>
+            <p>2: Choose a survey title, question name along with question type and submit</p>
+            <p>3: Press view surveys tab on the navigation bar </p>
+            <p>4: Select the survey you want to vote on and answer the questions and press submit</p>
+            <iframe width="420" height="315"
+                    src="https://www.youtube.com/embed/VS7VoH5Pxig">
+            </iframe>
+        </div>
+    </div>
+    <p>Check out our social medias:
+    <a href="https://www.facebook.com/">
+        <ion-icon name="logo-facebook" id="social"></ion-icon>
+    </a>
+    <a href="https://www.youtube.com/@Survey4All/featured">
+        <ion-icon name="logo-youtube" id="social"></ion-icon>
+    </a>
+    <a href="https://www.reddit.com/">
+        <ion-icon name="logo-reddit" id="social"></ion-icon>
+    </a>
+    <a href="https://twitter.com/home?lang=en">
+        <ion-icon name="logo-twitter" id="social"></ion-icon>
+    </a>
+    <a href="https://web.whatsapp.com/">
+        <ion-icon name="logo-whatsapp" id="social"></ion-icon>
+    </a>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</div>
+<script>
+    window.addEventListener("load", function(){
+        setTimeout(
+            function open(event){
+                document.querySelector(".popup").style.display = "block";
+            },
+        )
+    });
+    document.querySelector("#close").addEventListener("click", function(){
+        document.querySelector(".popup").style.display = "none";
+    });
+    var _CONTENT = [ "How old are you?", "What do you study?", "On a scale from 1 to 10...", "What's your favourite food?", "Have you created a survey?", "Do you like...?", "Choose between..."];
+    // Current question being processed
+    var _PART = 0;
+    // Character number of the current question being processed
+    var _PART_INDEX = 0;
+    // Holds the handle returned from setInterval
+    var _INTERVAL_VAL;
+    // Element that holds the questions
+    var _ELEMENT = document.querySelector("#text");
+    // Typing effect
+    function Type() {
+        var text =  _CONTENT[_PART].substring(0, _PART_INDEX + 1);
+        _ELEMENT.innerHTML = text;
+        _PART_INDEX++;
+
+        // starts deleting question after it has been fully written.
+        if(text === _CONTENT[_PART]) {
+            clearInterval(_INTERVAL_VAL);
+            setTimeout(function() {
+                _INTERVAL_VAL = setInterval(Delete, 50);
+            }, 1000);
+        }
+    }
+
+    // deleting effect
+    function Delete() {
+        var text =  _CONTENT[_PART].substring(0, _PART_INDEX - 1);
+        _ELEMENT.innerHTML = text;
+        _PART_INDEX--;
+
+        // displays next question if previous has been deleted
+        if(text === '') {
+            clearInterval(_INTERVAL_VAL);
+
+            // displays first question if cycled through all questions
+            if(_PART == (_CONTENT.length - 1))
+                _PART = 0;
+            else
+                _PART++;
+            _PART_INDEX = 0;
+
+            // delays displaying next question
+            setTimeout(function() {
+                _INTERVAL_VAL = setInterval(Type, 100);
+            }, 200);
+        }
+    }
+
+    // starts typing effect on load
+    _INTERVAL_VAL = setInterval(Type, 100);
+</script>
+</body>
+</html>
