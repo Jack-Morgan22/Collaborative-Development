@@ -7,7 +7,7 @@
 
     $userID = htmlspecialchars($_GET['userid']);
 
-    $sql = "SELECT * FROM `SurveyDetails` WHERE User_UserID = '$userID'";
+    $sql = "SELECT * FROM `SurveyDetails` WHERE Users_UserID = '$userID'";
 
     $result = mysqli_query($conn, $sql);
 
